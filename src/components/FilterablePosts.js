@@ -8,7 +8,7 @@ function FilterablePosts(props)  {
     return (
         <div>
             <PostSearchBar setTitle={setTitle} />
-            <Posts title={title} posts={props.posts} />
+            <Posts title={title} posts={props.posts} editPosts={props.editPosts} />
         </div>
     );
 }

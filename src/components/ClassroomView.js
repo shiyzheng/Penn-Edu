@@ -26,7 +26,7 @@ function ClassroomView(props)  {
     return (
     <div>
         <AddPost posts={posts} addNewPost={setPosts}/>
-        <FilterablePosts posts={posts}/>
+        <FilterablePosts posts={posts} editPosts={setPosts}/>
     </div>
     );
 }

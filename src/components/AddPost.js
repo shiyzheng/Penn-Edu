@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function AddPost(props) {
 
     let newTitle;
     let newBody;
+
+    const [id, setId] = useState(1);
 
     const handleOnChange = (e) => {
         if (e.target.name === 'title') {
@@ -16,8 +18,8 @@ function AddPost(props) {
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        const newPost = {title: newTitle, body: newBody};
-
+        const newPost = {id: id, title: newTitle, body: newBody};
+        setId(id + 1);
         const form = document.getElementById('add');
         form.reset();
         props.addNewPost([...props.posts, newPost]);
