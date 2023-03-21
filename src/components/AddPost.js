@@ -5,17 +5,18 @@ function AddPost(props) {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [priv, setPriv] = useState(false);
-
     const [anon, setAnon] = useState(false);
+    const [id, setId] = useState(1);
+    
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        const newPost = {title: title, body: body, private: priv, anonymous: anon};
-
+        const newPost = {id: id, title: title, body: body, private: priv, anonymous: anon};
         const form = document.getElementById('add');
         form.reset();
         setTitle('');
         setBody('');
-        props.addNewPost([...props.posts, newPost]);
+        props.add
+        ([...props.posts, newPost]);
     }
 
     return (
