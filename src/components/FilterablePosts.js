@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-// import { PropTypes } from 'prop-types';
 import { Posts } from './Posts';
 import PostSearchBar from './PostSearchBar';
 
@@ -14,10 +13,5 @@ function FilterablePosts(props) {
     </div>
   );
 }
-
-// FilterablePosts.propTypes = {
-//   posts: PropTypes.arrays.isRequired,
-//   editPosts: PropTypes.func.isRequired,
-// };
 
 export default FilterablePosts;

@@ -1,11 +1,9 @@
-/* eslint-disable no-use-before-define */
-/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 
 function PostCard(props) {
-  const { posts } = props;
-  const { title: postTitle, body: postBody } = posts;
+  const { posts, onEdit } = props;
+  const { title: postTitle, body: postBody, id } = posts;
   const [title, setTitle] = useState(postTitle);
   const [body, setBody] = useState(postBody);
   const [prevTitle, setPrevTitle] = useState(postTitle);
@@ -25,8 +23,8 @@ function PostCard(props) {
   };
 
   const handleSave = () => {
-    props.onEdit({
-      id: props.posts.id,
+    onEdit({
+      id,
       title,
       body,
     });
@@ -62,17 +60,17 @@ function PostCard(props) {
       <div>
         Question:
         {' '}
-        {props.posts.title}
+        {postTitle}
       </div>
       <div>
         Body:
         {' '}
-        {props.posts.body}
+        {postBody}
       </div>
       <div>
         ID:
         {' '}
-        {props.posts.id}
+        {id}
       </div>
       <button type="button" onClick={handleEdit}>Edit</button>
     </div>
@@ -80,25 +78,10 @@ function PostCard(props) {
 }
 
 function Posts(props) {
-  const displayPosts = () => {
-    const displayedPosts = [];
-    props.posts.forEach((element) => {
-      if (props.title === '') {
-        displayedPosts.push(
-          <PostCard posts={element} onEdit={handleEditPosts} />,
-        );
-      } else if (element.title.includes(props.title)) {
-        displayedPosts.push(
-          <PostCard posts={element} onEdit={handleEditPosts} />,
-        );
-      }
-    });
-    return displayedPosts;
-  };
-
+  const { posts, editPosts, title } = props;
   const handleEditPosts = (updatedPost) => {
     const displayedPosts = [];
-    props.posts.forEach((element) => {
+    posts.forEach((element) => {
       if (element.id === updatedPost.id) {
         displayedPosts.push(
           updatedPost,
@@ -109,7 +92,23 @@ function Posts(props) {
         );
       }
     });
-    props.editPosts(displayedPosts);
+    editPosts(displayedPosts);
+  };
+
+  const displayPosts = () => {
+    const displayedPosts = [];
+    posts.forEach((element) => {
+      if (title === '') {
+        displayedPosts.push(
+          <PostCard posts={element} onEdit={handleEditPosts} />,
+        );
+      } else if (element.title.includes(title)) {
+        displayedPosts.push(
+          <PostCard posts={element} onEdit={handleEditPosts} />,
+        );
+      }
+    });
+    return displayedPosts;
   };
 
   const displayedPosts = displayPosts();

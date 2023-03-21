@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 
 function AddPost(props) {
@@ -11,15 +10,6 @@ function AddPost(props) {
   const [anon, setAnon] = useState(false);
 
   const [id, setId] = useState(1);
-
-  // const handleOnChange = (e) => {
-  //   if (e.target.name === 'title') {
-  //     setTitle(e.target.value);
-  //   }
-  //   if (e.target.name === 'body') {
-  //     setBody(e.target.value);
-  //   }
-  // };
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -49,8 +39,10 @@ function AddPost(props) {
       {' '}
       <form id="add" className="mx-auto" style={{ width: '800px' }}>
         <div className="form-group">
-          <label className="form-check-label" htmlFor="Title">Title</label>
-          <input type="text" className="form-control" id="Title" onChange={handleTitleChange} />
+          <label className="form-check-label" htmlFor="Title">
+            Title
+            <input type="text" className="form-control" id="Title" onChange={handleTitleChange} />
+          </label>
         </div>
 
         <div className="form-group" data-testid="form-group">
@@ -65,26 +57,25 @@ function AddPost(props) {
 
         <div className="form-row">
           <div className="form-check col-md-4">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              id="Private"
-              onClick={() => setPriv(!priv)}
-            />
             <label className="form-check-label" htmlFor="Private">
               Private
+              <input
+                className="form-check-input"
+                type="checkbox"
+                id="Private"
+                onClick={() => setPriv(!priv)}
+              />
             </label>
           </div>
           <div className="form-check col-md-6 ">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              id="Anonymous"
-              onClick={() => setAnon(!anon)}
-            />
             <label className="form-check-label" htmlFor="Anonymous">
-
               Anonymous
+              <input
+                className="form-check-input"
+                type="checkbox"
+                id="Anonymous"
+                onClick={() => setAnon(!anon)}
+              />
             </label>
           </div>
           <button
