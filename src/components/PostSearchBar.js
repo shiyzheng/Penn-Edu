@@ -1,11 +1,10 @@
-/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import React from 'react';
 
 function PostSearchBar(props) {
-  // const { setTitle } = props;
+  const { setTitle } = props;
   const handleOnChange = (e) => {
-    props.setTitle(e.target.value);
+    setTitle(e.target.value);
   };
 
   return (

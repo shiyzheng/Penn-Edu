@@ -4,10 +4,12 @@
 import React, { useState } from 'react';
 
 function PostCard(props) {
-  const [title, setTitle] = useState(props.posts.title);
-  const [body, setBody] = useState(props.posts.body);
-  const [prevTitle, setPrevTitle] = useState(props.posts.title);
-  const [prevBody, setPrevBody] = useState(props.posts.body);
+  const { posts } = props;
+  const { title: postTitle, body: postBody } = posts;
+  const [title, setTitle] = useState(postTitle);
+  const [body, setBody] = useState(postBody);
+  const [prevTitle, setPrevTitle] = useState(postTitle);
+  const [prevBody, setPrevBody] = useState(postBody);
   const [isEditing, setIsEditing] = useState(false);
 
   const handleTitleChange = (e) => {
