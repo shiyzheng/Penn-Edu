@@ -3,8 +3,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 
-import React, { useState } from 'react';
-
 function PostCard(props) {
   const { posts } = props;
   const { title: postTitle, body: postBody } = posts;
