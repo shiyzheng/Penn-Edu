@@ -23,8 +23,8 @@ export const getPostById = async (id) => {
 
 export const createNewPost = async (postObject) => {
     try {
-        const response = await axios.post(rootURL, 
-            `title=${postObject.title}&body=${postObject.body}`);
+        const response = await axios.post(rootURL, {title :postObject.title, body:postObject.body, private: postObject.private, anonymous: postObject.anonymous}
+        );
         console.log('a response', response.data);
         return response.data
     } catch (err) {
