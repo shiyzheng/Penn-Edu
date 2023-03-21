@@ -3,12 +3,16 @@
     {
       "id": 1,
       "title": "hw3 q5 help",
-      "body": "help"
+      "body": "help",
+      "private": true,
+      "anonymous": false
     },
     {
       "id": 2,
       "title": "hw1 q7 help",
-      "body": "help"
+      "body": "help",
+      "private": true,
+      "anonymous": false
     },
     {
       "id": 3,
