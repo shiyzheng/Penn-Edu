@@ -1,113 +1,126 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
+import React, { useState } from 'react';
 
 import React, { useState } from 'react';
 
 function PostCard(props) {
-    const [title, setTitle] = useState(props.posts.title);
-    const [body, setBody] = useState(props.posts.body);
-    const [prevTitle, setPrevTitle] = useState(props.posts.title);
-    const [prevBody, setPrevBody] = useState(props.posts.body);
-    const [isEditing, setIsEditing] = useState(false);
+  const { posts } = props;
+  const { title: postTitle, body: postBody } = posts;
+  const [title, setTitle] = useState(postTitle);
+  const [body, setBody] = useState(postBody);
+  const [prevTitle, setPrevTitle] = useState(postTitle);
+  const [prevBody, setPrevBody] = useState(postBody);
+  const [isEditing, setIsEditing] = useState(false);
 
-    const handleTitleChange = (e) => {
-        setTitle(e.target.value);
-    };
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
 
-    const handleBodyChange = (e) => {
-        setBody(e.target.value);
-    };
+  const handleBodyChange = (e) => {
+    setBody(e.target.value);
+  };
 
-    const handleEdit = () => {
-        setIsEditing(!isEditing);
-    };
+  const handleEdit = () => {
+    setIsEditing(!isEditing);
+  };
 
-    const handleSave = () => {
-        props.onEdit({
-            id: props.posts.id,
-            title: title,
-            body: body
-        });
-        setIsEditing(!isEditing);
-        setPrevTitle(title);
-        setPrevBody(body);
-    };
+  const handleSave = () => {
+    props.onEdit({
+      id: props.posts.id,
+      title,
+      body,
+    });
+    setIsEditing(!isEditing);
+    setPrevTitle(title);
+    setPrevBody(body);
+  };
 
-    const handleCancel = () => {
-        setIsEditing(!isEditing);
-        setTitle(prevTitle);
-        setBody(prevBody);
-    };
+  const handleCancel = () => {
+    setIsEditing(!isEditing);
+    setTitle(prevTitle);
+    setBody(prevBody);
+  };
 
-    if (isEditing) {
-        return (
-            <div>
-                <div>
-                    Title:
-                    <input type="text" value={title} onChange={handleTitleChange} />
-                </div>
-                <div>
-                    Body:
-                    <textarea value={body} onChange={handleBodyChange} />
-                </div>
-                <button onClick={handleCancel}>Cancel</button>
-                <button onClick={handleSave}>Save</button>
-            </div>
-        );
-    } else {
-        return (
-            <div>
-                <div>
-                    Question: {props.posts.title}
-                </div>
-                <div>
-                    Body: {props.posts.body}
-                </div>
-                <div>
-                    ID: {props.posts.id}
-                </div>
-                <button onClick={handleEdit}>Edit</button>
-            </div>
-        );
-    }
+  if (isEditing) {
+    return (
+      <div>
+        <div>
+          Title:
+          <input type="text" value={title} onChange={handleTitleChange} />
+        </div>
+        <div>
+          Body:
+          <textarea value={body} onChange={handleBodyChange} />
+        </div>
+        <button type="button" onClick={handleCancel}>Cancel</button>
+        <button type="button" onClick={handleSave}>Save</button>
+      </div>
+    );
+  }
+  return (
+    <div>
+      <div>
+        Question:
+        {' '}
+        {props.posts.title}
+      </div>
+      <div>
+        Body:
+        {' '}
+        {props.posts.body}
+      </div>
+      <div>
+        ID:
+        {' '}
+        {props.posts.id}
+      </div>
+      <button type="button" onClick={handleEdit}>Edit</button>
+    </div>
+  );
 }
 
 function Posts(props) {
-    const displayPosts = () => {
-        const displayedPosts = [];
-        props.posts.forEach(element => {
-            if (props.title === '') {
-                displayedPosts.push(
-                    <PostCard posts={element} onEdit={handleEditPosts} />);
-            } else {
-                if (element.title.includes(props.title)) {
-                    displayedPosts.push(
-                        <PostCard posts={element} onEdit={handleEditPosts} />);
-                }
-            }
-        })
-        return displayedPosts;
-    }
-    
-    const handleEditPosts = (updatedPost) => {
-        const displayedPosts = [];
-        props.posts.forEach(element => {
-            if (element.id === updatedPost.id) {
-                displayedPosts.push(
-                    updatedPost);
-            } else {
-                displayedPosts.push(
-                    element);
-            }
-        })
-        props.editPosts(displayedPosts);
-    }
+  const displayPosts = () => {
+    const displayedPosts = [];
+    props.posts.forEach((element) => {
+      if (props.title === '') {
+        displayedPosts.push(
+          <PostCard posts={element} onEdit={handleEditPosts} />,
+        );
+      } else if (element.title.includes(props.title)) {
+        displayedPosts.push(
+          <PostCard posts={element} onEdit={handleEditPosts} />,
+        );
+      }
+    });
+    return displayedPosts;
+  };
 
-    const displayedPosts = displayPosts();
-    return (
-        <div>
-            Posts
-            {displayedPosts}
-        </div>
-    );
+  const handleEditPosts = (updatedPost) => {
+    const displayedPosts = [];
+    props.posts.forEach((element) => {
+      if (element.id === updatedPost.id) {
+        displayedPosts.push(
+          updatedPost,
+        );
+      } else {
+        displayedPosts.push(
+          element,
+        );
+      }
+    });
+    props.editPosts(displayedPosts);
+  };
+
+  const displayedPosts = displayPosts();
+  return (
+    <div>
+      Posts
+      {displayedPosts}
+    </div>
+  );
 }
 
-export default Posts;
+export { Posts, PostCard };

@@ -1,64 +1,106 @@
-import React from 'react';
-import { useState } from 'react'
+/* eslint-disable react/prop-types */
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import React, { useState } from 'react';
+
 function AddPost(props) {
+  const { posts, addNewPost } = props;
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
+  const [priv, setPriv] = useState(false);
 
-    const [title, setTitle] = useState('');
-    const [body, setBody] = useState('');
-    const [priv, setPriv] = useState(false);
-    const [anon, setAnon] = useState(false);
-    const [id, setId] = useState(1);
-    
-    const handleOnSubmit = (e) => {
-        e.preventDefault();
-        const newPost = {id: id, title: title, body: body, private: priv, anonymous: anon};
-        const form = document.getElementById('add');
-        form.reset();
-        setTitle('');
-        setBody('');
-        props.add
-        ([...props.posts, newPost]);
-    }
+  const [anon, setAnon] = useState(false);
 
-    return (
-        <div>
-            {' '}
-            <form id = 'add' class ="mx-auto" style={{width: "800px"}}>
-            <div class="form-group" >                            
-                <label class="form-check-label" for="Title">Title</label>
-                <input type="text" class="form-control" id="Title" onChange={e => setTitle(e.target.value)}/>
-            
-            </div>
+  const [id, setId] = useState(1);
 
-            <div class="form-group" data-testid="form-group">                            
-            <div class="input-group-prepend">
+  // const handleOnChange = (e) => {
+  //   if (e.target.name === 'title') {
+  //     setTitle(e.target.value);
+  //   }
+  //   if (e.target.name === 'body') {
+  //     setBody(e.target.value);
+  //   }
+  // };
 
-                </div>
-                <textarea class="form-control" aria-label="With textarea" data-testid="body" onChange={e => setBody(e.target.value)}></textarea>
-            </div>
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
 
-            <div class="form-row">
-            <div class="form-check col-md-4">
-                <input class="form-check-input" type="checkbox" id="Private" onclick={()=>setPriv(!priv)}/>
-                <label class="form-check-label" for="Private">
-                    Private
-                </label>
-                </div>
-                <div class="form-check col-md-6 ">
-                <input class="form-check-input" type="checkbox" id="Anonymous"onclick={()=>setAnon(!anon)} />
-                <label class="form-check-label" for="Anonymous">
-                    
-                Anonymous
-                </label>
-                </div>   
-                <button onClick={handleOnSubmit}type="submit" class="btn btn-primary" data-testid="button">Create Post</button>
-            </div>
+  const handleBodyChange = (e) => {
+    setBody(e.target.value);
+  };
 
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    const newPost = {
+      title,
+      body,
+      id,
+      private: priv,
+      anonymous: anon,
+    };
+    setId(id + 1);
+    const form = document.getElementById('add');
+    form.reset();
+    addNewPost([...posts, newPost]);
+  };
 
-
- 
-            </form>
+  return (
+    <div>
+      {' '}
+      <form id="add" className="mx-auto" style={{ width: '800px' }}>
+        <div className="form-group">
+          <label className="form-check-label" htmlFor="Title">Title</label>
+          <input type="text" className="form-control" id="Title" onChange={handleTitleChange} />
         </div>
-    );
+
+        <div className="form-group" data-testid="form-group">
+          <div className="input-group-prepend" />
+          <textarea
+            className="form-control"
+            aria-label="With textarea"
+            data-testid="body"
+            onChange={handleBodyChange}
+          />
+        </div>
+
+        <div className="form-row">
+          <div className="form-check col-md-4">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              id="Private"
+              onClick={() => setPriv(!priv)}
+            />
+            <label className="form-check-label" htmlFor="Private">
+              Private
+            </label>
+          </div>
+          <div className="form-check col-md-6 ">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              id="Anonymous"
+              onClick={() => setAnon(!anon)}
+            />
+            <label className="form-check-label" htmlFor="Anonymous">
+
+              Anonymous
+            </label>
+          </div>
+          <button
+            onClick={handleOnSubmit}
+            type="submit"
+            className="btn btn-primary"
+            data-testid="button"
+          >
+            Create Post
+
+          </button>
+        </div>
+
+      </form>
+    </div>
+  );
 }
 
 export default AddPost;

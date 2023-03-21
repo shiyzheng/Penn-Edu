@@ -4,7 +4,7 @@ exports[`renders addPost matches snapshot 1`] = `
 <div>
    
   <form
-    class="mx-auto"
+    className="mx-auto"
     id="add"
     style={
       Object {
@@ -13,72 +13,72 @@ exports[`renders addPost matches snapshot 1`] = `
     }
   >
     <div
-      class="form-group"
+      className="form-group"
     >
       <label
-        class="form-check-label"
-        for="Title"
+        className="form-check-label"
+        htmlFor="Title"
       >
         Title
       </label>
       <input
-        class="form-control"
+        className="form-control"
         id="Title"
         onChange={[Function]}
         type="text"
       />
     </div>
     <div
-      class="form-group"
+      className="form-group"
       data-testid="form-group"
     >
       <div
-        class="input-group-prepend"
+        className="input-group-prepend"
       />
       <textarea
         aria-label="With textarea"
-        class="form-control"
+        className="form-control"
         data-testid="body"
         onChange={[Function]}
       />
     </div>
     <div
-      class="form-row"
+      className="form-row"
     >
       <div
-        class="form-check col-md-4"
+        className="form-check col-md-4"
       >
         <input
-          class="form-check-input"
+          className="form-check-input"
           id="Private"
-          onclick={[Function]}
+          onClick={[Function]}
           type="checkbox"
         />
         <label
-          class="form-check-label"
-          for="Private"
+          className="form-check-label"
+          htmlFor="Private"
         >
           Private
         </label>
       </div>
       <div
-        class="form-check col-md-6 "
+        className="form-check col-md-6 "
       >
         <input
-          class="form-check-input"
+          className="form-check-input"
           id="Anonymous"
-          onclick={[Function]}
+          onClick={[Function]}
           type="checkbox"
         />
         <label
-          class="form-check-label"
-          for="Anonymous"
+          className="form-check-label"
+          htmlFor="Anonymous"
         >
           Anonymous
         </label>
       </div>
       <button
-        class="btn btn-primary"
+        className="btn btn-primary"
         data-testid="button"
         onClick={[Function]}
         type="submit"
