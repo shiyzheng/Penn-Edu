@@ -51,7 +51,6 @@ function AddPost(props) {
         <div className="form-group">
           <label className="form-check-label" htmlFor="Title">Title</label>
           <input type="text" className="form-control" id="Title" onChange={handleTitleChange} />
-
         </div>
 
         <div className="form-group" data-testid="form-group">
