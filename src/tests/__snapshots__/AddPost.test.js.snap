@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders addPost matches snapshot 1`] = `
+<div>
+   
+  <form
+    className="mx-auto"
+    id="add"
+    style={
+      Object {
+        "width": "800px",
+      }
+    }
+  >
+    <div
+      className="form-group"
+    >
+      <label
+        className="form-check-label"
+        htmlFor="Title"
+      >
+        Title
+      </label>
+      <input
+        className="form-control"
+        id="Title"
+        onChange={[Function]}
+        type="text"
+      />
+    </div>
+    <div
+      className="form-group"
+      data-testid="form-group"
+    >
+      <div
+        className="input-group-prepend"
+      />
+      <textarea
+        aria-label="With textarea"
+        className="form-control"
+        data-testid="body"
+        onChange={[Function]}
+      />
+    </div>
+    <div
+      className="form-row"
+    >
+      <div
+        className="form-check col-md-4"
+      >
+        <input
+          className="form-check-input"
+          id="Private"
+          onClick={[Function]}
+          type="checkbox"
+        />
+        <label
+          className="form-check-label"
+          htmlFor="Private"
+        >
+          Private
+        </label>
+      </div>
+      <div
+        className="form-check col-md-6 "
+      >
+        <input
+          className="form-check-input"
+          id="Anonymous"
+          onClick={[Function]}
+          type="checkbox"
+        />
+        <label
+          className="form-check-label"
+          htmlFor="Anonymous"
+        >
+          Anonymous
+        </label>
+      </div>
+      <button
+        className="btn btn-primary"
+        data-testid="button"
+        onClick={[Function]}
+        type="submit"
+      >
+        Create Post
+      </button>
+    </div>
+  </form>
+</div>
+`;
