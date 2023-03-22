@@ -1,10 +1,10 @@
-
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 
 function PostCard(props) {
-  const { posts } = props;
+  const { posts, onEdit } = props;
   const {
-    title: postTitle, body: postBody, anonymous: postAnonymous, private: postPriv,
+    title: postTitle, body: postBody, anonymous: postAnonymous, private: postPriv, id,
   } = posts;
 
   const [title, setTitle] = useState(postTitle);
@@ -18,21 +18,21 @@ function PostCard(props) {
   const [prevPriv, setPrevPriv] = useState(postPriv);
   const [isEditing, setIsEditing] = useState(false);
 
-    const handleTitleChange = (e) => {
-        setTitle(e.target.value);
-    };
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
 
-    const handleBodyChange = (e) => {
-        setBody(e.target.value);
-    };
+  const handleBodyChange = (e) => {
+    setBody(e.target.value);
+  };
 
-    const handleEdit = () => {
-        setIsEditing(!isEditing);
-    };
+  const handleEdit = () => {
+    setIsEditing(!isEditing);
+  };
 
   const handleSave = () => {
-    props.onEdit({
-      id: props.posts.id,
+    onEdit({
+      id,
       title,
       body,
       anonymous,
@@ -68,7 +68,7 @@ function PostCard(props) {
             className="form-check-input"
             type="checkbox"
             id="Private"
-            checked={priv}
+            defaultChecked={priv}
             onClick={() => setPriv(!priv)}
           />
           Private
@@ -78,7 +78,7 @@ function PostCard(props) {
             className="form-check-input"
             type="checkbox"
             id="Anonymous"
-            checked={anonymous}
+            defaultChecked={anonymous}
             onClick={() => setAnonymous(!anonymous)}
           />
           Anonymous
@@ -93,17 +93,17 @@ function PostCard(props) {
       <div>
         Question:
         {' '}
-        {props.posts.title}
+        {postTitle}
       </div>
       <div>
         Body:
         {' '}
-        {props.posts.body}
+        {postBody}
       </div>
       <div>
         ID:
         {' '}
-        {props.posts.id}
+        {id}
       </div>
       <button data-testid="edit" id="edit" type="button" onClick={handleEdit}>Edit</button>
     </div>
@@ -111,36 +111,38 @@ function PostCard(props) {
 }
 
 function Posts(props) {
-    const displayPosts = () => {
-        const displayedPosts = [];
-        props.posts.forEach(element => {
-            if (props.title === '') {
-                displayedPosts.push(
-                    <PostCard posts={element} onEdit={handleEditPosts} />);
-            } else {
-                if (element.title.includes(props.title)) {
-                    displayedPosts.push(
-                        <PostCard posts={element} onEdit={handleEditPosts} />);
-                }
-            }
-        })
-        return displayedPosts;
-    }
-    
-    const handleEditPosts = (updatedPost) => {
-        const displayedPosts = [];
-        props.posts.forEach(element => {
-            if (element.id === updatedPost.id) {
-                displayedPosts.push(
-                    updatedPost);
-            } else {
-                displayedPosts.push(
-                    element);
-            }
-        })
-        props.editPosts(displayedPosts);
-    }
+  const { posts, title, editPosts } = props;
+  const handleEditPosts = (updatedPost) => {
+    const displayedPosts = [];
+    posts.forEach((element) => {
+      if (element.id === updatedPost.id) {
+        displayedPosts.push(
+          updatedPost,
+        );
+      } else {
+        displayedPosts.push(
+          element,
+        );
+      }
+    });
+    editPosts(displayedPosts);
+  };
 
+  const displayPosts = () => {
+    const displayedPosts = [];
+    posts.forEach((element) => {
+      if (title === '') {
+        displayedPosts.push(
+          <PostCard posts={element} onEdit={handleEditPosts} />,
+        );
+      } else if (element.title.includes(title)) {
+        displayedPosts.push(
+          <PostCard posts={element} onEdit={handleEditPosts} />,
+        );
+      }
+    });
+    return displayedPosts;
+  };
 
   const displayedPosts = displayPosts();
   return (

@@ -20,13 +20,13 @@ exports[`renders addPost matches snapshot 1`] = `
         htmlFor="Title"
       >
         Title
+        <input
+          className="form-control"
+          id="Title"
+          onChange={[Function]}
+          type="text"
+        />
       </label>
-      <input
-        className="form-control"
-        id="Title"
-        onChange={[Function]}
-        type="text"
-      />
     </div>
     <div
       className="form-group"
@@ -48,33 +48,33 @@ exports[`renders addPost matches snapshot 1`] = `
       <div
         className="form-check col-md-4"
       >
-        <input
-          className="form-check-input"
-          id="Private"
-          onClick={[Function]}
-          type="checkbox"
-        />
         <label
           className="form-check-label"
           htmlFor="Private"
         >
           Private
+          <input
+            className="form-check-input"
+            id="Private"
+            onClick={[Function]}
+            type="checkbox"
+          />
         </label>
       </div>
       <div
         className="form-check col-md-6 "
       >
-        <input
-          className="form-check-input"
-          id="Anonymous"
-          onClick={[Function]}
-          type="checkbox"
-        />
         <label
           className="form-check-label"
           htmlFor="Anonymous"
         >
           Anonymous
+          <input
+            className="form-check-input"
+            id="Anonymous"
+            onClick={[Function]}
+            type="checkbox"
+          />
         </label>
       </div>
       <button
