@@ -1,55 +1,71 @@
 /* eslint-disable no-undef */
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, screen, fireEvent } from '@testing-library/react';
 import React from 'react';
-import { act } from 'react-test-renderer';
-// import { PostCard } from '../components/Posts';
 import { Posts, PostCard } from '../components/Posts';
-// import renderer from 'react-test-renderer';
-// import PostSearchBar from '../components/PostSearchBar';
 
-const posts = [
-  {
+test('handleSave', () => {
+  const onEditMock = jest.fn();
+  render(
+    <PostCard
+      posts={{
+        id: 1, title: 'title', body: 'body', anonymous: false, private: false,
+      }}
+      onEdit={onEditMock}
+    />,
+  );
+  const editButton = screen.getByTestId('edit');
+  fireEvent.click(editButton);
+
+  const titleInput = screen.getByTestId('title');
+  const bodyInput = screen.getByTestId('body');
+  const saveButton = screen.getByTestId('save');
+
+  fireEvent.change(titleInput, { target: { value: 'New Title' } });
+  fireEvent.change(bodyInput, { target: { value: 'New Body' } });
+  fireEvent.click(saveButton);
+
+  expect(onEditMock).toHaveBeenCalledTimes(1);
+  expect(onEditMock).toHaveBeenCalledWith({
     id: 1,
-    title: 'hw3 q5 help',
-    body: 'help',
-    private: true,
+    title: 'New Title',
+    body: 'New Body',
     anonymous: false,
-  },
-  {
-    id: 2,
-    title: 'hw1 q7 help',
-    body: 'help',
-    private: true,
-    anonymous: false,
-  },
-  {
-    id: 3,
-    title: 'hw5 q5 help',
-    body: 'help',
-  },
-  {
-    id: 4,
-    title: 'hw3 q1 help',
-    body: 'help',
-  },
-  {
-    title: 'hw1 q1 help',
-    body: 'help',
-    id: 5,
-  },
-];
+    private: false,
+  });
+});
 
-test('renders posts has heading', () => {
-  render(<Posts posts={posts} />);
-  const linkElement = screen.getByText('Posts');
+test('handleCancel', () => {
+  render(<PostCard posts={{
+    id: 1, title: 'title', body: 'body', anonymous: false, private: false,
+  }}
+  />);
+  const editButton = screen.getByTestId('edit');
+  fireEvent.click(editButton);
 
+  const titleInput = screen.getByTestId('title');
+  const bodyInput = screen.getByTestId('body');
+  const cancelButton = screen.getByTestId('cancel');
+
+  fireEvent.change(titleInput, { target: { value: 'New Title' } });
+  fireEvent.change(bodyInput, { target: { value: 'New Body' } });
+  fireEvent.click(cancelButton);
+  const linkElement = screen.getByTestId('edit');
   expect(linkElement).toBeInTheDocument();
 });
 
-test('renders posts has edit', () => {
-  render(<PostCard posts={posts} />);
-  const linkElement = screen.getByText('Edit', { selector: 'button' });
-
+test('all posts', () => {
+  const posts = [
+    {
+      id: 1, title: 'title1', body: 'body1', anonymous: false, private: false,
+    },
+    {
+      id: 2, title: 'title2', body: 'body2', anonymous: false, private: false,
+    },
+    {
+      id: 3, title: 'title3', body: 'body3', anonymous: false, private: false,
+    },
+  ];
+  render(<Posts posts={posts} />);
+  const linkElement = screen.getByTestId('posts');
   expect(linkElement).toBeInTheDocument();
 });
