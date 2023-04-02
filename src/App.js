@@ -32,47 +32,79 @@
 
 // export default App;
 import './components/App.css';
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
+// import axios from 'axios';
+import { useRoutes } from 'react-router-dom';
 import ClassroomView from './components/ClassroomView';
 import AddClassroom from './components/AddClassroom';
+import Login from './components/Login';
+import Classrooms from './components/Classrooms';
+import Signup from './components/Signup';
 
 function App() {
   const [login, setLogin] = useState(false);
-  const name = useRef('');
+  // const name = useRef('');
 
-  const handleClick = () => {
-    setLogin(!login);
-  };
+  // const checkLogged = async () => {
+  //   try {
+  //     const log = await axios.get('/account/isLogged');
+  //     setLogin(log);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
+  // checkLogged();
+  console.log('a');
+  const element = useRoutes([{ path: '/hom', element: <Home login={login} /> },
+    { path: '/Login', element: <Login setLogin={setLogin} /> },
+    { path: '/Signup', element: <Signup setLogin={setLogin} /> },
+    { path: '/Home', element: <Classrooms /> },
+    { path: '/Classroom', element: <ClassroomView /> },
+    { path: '/AddClassroom', element: <AddClassroom /> },
+  ]);
+  return element;
 
-  const handleChange = (e) => {
-    name.current = e.target.value;
-  };
-  if (login === false) {
-    return (
-      <div className="App">
-        <label>
-          {' '}
-          Name:
-          <input type="text" name="name" onChange={handleChange} />
-        </label>
-        <button type="button" onClick={handleClick}>Login</button>
-      </div>
-    );
-  }
+  // const handleClick = () => {
+  //   setLogin(!login);
+  // };
+
+  // const handleChange = (e) => {
+  //   name.current = e.target.value;
+  // };
+  // if (login === false) {
+  //   return (
+  //     <div className="App">
+  //       <label>
+  //         {' '}
+  //         Name:
+  //         <input type="text" name="name" onChange={handleChange} />
+  //       </label>
+  //       <button type="button" onClick={handleClick}>Login</button>
+  //     </div>
+  //   );
+  // }
+  // return (
+  //   <div className="App">
+  //     <label>
+  //       {' '}
+  //       Welcome
+  //       {' '}
+  //       {' '}
+  //       {name.current}
+  //       <button type="button" onClick={handleClick}>Logout</button>
+  //     </label>
+  //     <AddClassroom />
+  //     <ClassroomView />
+  //   </div>
+  // );
+}
+function Home() {
+  console.log('homepage');
   return (
-    <div className="App">
-      <label>
-        {' '}
-        Welcome
-        {' '}
-        {' '}
-        {name.current}
-        <button type="button" onClick={handleClick}>Logout</button>
-      </label>
-      <AddClassroom />
-      <ClassroomView />
-    </div>
+    <>
+      {' '}
+      Home Page.
+    </>
   );
 }
-
 export default App;
