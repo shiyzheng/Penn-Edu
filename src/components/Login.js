@@ -1,13 +1,13 @@
-// /* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 // import React, { useState, useRef } from 'react';
 
-// function Login() {
+function Login() {
 //   const [login, setLogin] = useState(false);
 //   const name = useRef('');
 
-//   const handleClick = () => {
-//     setLogin(!login);
-//   };
+  //   const handleClick = () => {
+  //     setLogin(!login);
+  //   };
 
 //   const handleChange = (e) => {
 //     name.current = e.target.value;
@@ -36,6 +36,6 @@
 //       </label>
 //     </div>
 //   );
-// }
+}
 
-// export default Login;
+export default Login;
