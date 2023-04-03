@@ -10,6 +10,23 @@ export const getAllClassrooms = async () => {
   }
 };
 
+export const createNewClassroom = async (classroomObject) => {
+  try {
+    const {
+      name, admins, users, posts,
+    } = classroomObject;
+    const response = await axios.post(classroomURL, {
+      name,
+      admins,
+      users,
+      posts,
+    });
+    return response.data;
+  } catch (err) {
+    return err;
+  }
+};
+
 export const getAllPostsInClassroomById = async (id) => {
   try {
     const response = await axios.get(`${classroomURL}/${id}`);

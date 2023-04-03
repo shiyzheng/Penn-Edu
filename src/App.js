@@ -59,10 +59,10 @@ function App() {
   // };
   // checkLogged();
   // console.log('a');
-  const element = useRoutes([{ path: '/', element: <Home login={login} /> },
+  const element = useRoutes([{ path: '/', element: <Home login={login} username={username} /> },
     { path: '/Login', element: <Login setLogin={setLogin} /> },
     { path: '/Signup', element: <Signup setLogin={setLogin} setUsername={setUsername} setPassword={setPassword} username={username} password={password} login={login} /> },
-    { path: '/Home', element: <Classrooms classrooms={classrooms} setClassrooms={setClassrooms} /> },
+    { path: '/Home', element: <Classrooms classrooms={classrooms} setClassrooms={setClassrooms} username={username} /> },
     { path: '/Classroom', element: <ClassroomView /> },
     { path: '/AddClassroom', element: <AddClassroom /> },
   ]);
@@ -104,9 +104,9 @@ function App() {
 }
 function Home(props) {
   // console.log('homepage');
-  const { login } = props;
+  const { login, username } = props;
   return (
-    <div>
+    <div className="container">
       {!login && (
         <div>
           {' '}
@@ -120,6 +120,11 @@ function Home(props) {
       )}
       {login && (
         <div>
+          <div>
+            Welcome
+            {' '}
+            {username}
+          </div>
           <Link to="/home">Classrooms</Link>
         </div>
       )}

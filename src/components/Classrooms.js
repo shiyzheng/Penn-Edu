@@ -18,7 +18,7 @@ function ClassroomPreview(props) {
 function Classrooms(props) {
   // right after an user login in, app should direct user
   // to this page which has a list of classrooms that user is in
-  const { classrooms, setClassrooms } = props;
+  const { classrooms, setClassrooms, username } = props;
   useEffect(() => {
     const getClassroomsWrapper = async () => {
       try {
@@ -39,9 +39,6 @@ function Classrooms(props) {
         <ClassroomPreview
           key={element.id}
           name={element.name}
-          admins={element.admins}
-          users={element.users}
-          posts={element.posts}
           id={element.id}
         />,
       );
@@ -53,7 +50,8 @@ function Classrooms(props) {
 
   return (
     <div>
-      <AddClassroom />
+      <Link to="/">Home</Link>
+      <AddClassroom setClassrooms={setClassrooms} username={username} />
       <br />
       {displayedClassrooms}
     </div>
