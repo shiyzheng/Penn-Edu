@@ -43,6 +43,8 @@ import Signup from './components/Signup';
 
 function App() {
   const [login, setLogin] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   // const name = useRef('');
 
   // const checkLogged = async () => {
@@ -54,10 +56,10 @@ function App() {
   //   }
   // };
   // checkLogged();
-  console.log('a');
-  const element = useRoutes([{ path: '/hom', element: <Home login={login} /> },
+  // console.log('a');
+  const element = useRoutes([{ path: '/', element: <Home login={login} /> },
     { path: '/Login', element: <Login setLogin={setLogin} /> },
-    { path: '/Signup', element: <Signup setLogin={setLogin} /> },
+    { path: '/Signup', element: <Signup setLogin={setLogin} setUsername={setUsername} setPassword={setPassword} username={username} password={password} login={login} /> },
     { path: '/Home', element: <Classrooms /> },
     { path: '/Classroom', element: <ClassroomView /> },
     { path: '/AddClassroom', element: <AddClassroom /> },
@@ -99,7 +101,7 @@ function App() {
   // );
 }
 function Home() {
-  console.log('homepage');
+  // console.log('homepage');
   return (
     <>
       {' '}

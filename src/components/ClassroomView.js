@@ -8,21 +8,10 @@ function ClassroomView() {
   useEffect(() => {
     async function getAllPostsWrapper() {
       const response = await getAllPosts();
-      // console.log('All posts', response);
-      // response = await getPostById(3);
-      // console.log('Post with id 3', response);
       return response;
     }
     getAllPostsWrapper();
-
-    // async function createNewPostWrapper() {
-    //     const newPost = {"title":"hw1 q1 help", "body":"help"};
-    //     let response = await createNewPost(newPost);
-    //     console.log('new post', response);
-    //     return response;
-    // }
-    // createNewPostWrapper()
-  }, [posts]);
+  });
   return (
     <div>
       <AddPost posts={posts} addNewPost={setPosts} />
