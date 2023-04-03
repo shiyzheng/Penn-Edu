@@ -28,6 +28,7 @@ function AddPost(props) {
       id,
       private: priv,
       anonymous: anon,
+      replies: [],
     };
     setId(id + 1);
     const form = document.getElementById('add');

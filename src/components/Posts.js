@@ -5,6 +5,7 @@ function PostCard(props) {
   const { posts, onEdit } = props;
   const {
     title: postTitle, body: postBody, anonymous: postAnonymous, private: postPriv, id,
+    replies: postReplies,
   } = posts;
 
   const [title, setTitle] = useState(postTitle);
@@ -17,6 +18,26 @@ function PostCard(props) {
   const [prevAnonymous, setPrevAnonymous] = useState(postAnonymous);
   const [prevPriv, setPrevPriv] = useState(postPriv);
   const [isEditing, setIsEditing] = useState(false);
+  const [reply, setReply] = useState('');
+  const [replies, setReplies] = useState(postReplies);
+
+  const handleReplySubmit = () => {
+    const updatedReplies = [...replies, reply];
+    setReplies(updatedReplies);
+    onEdit({
+      id,
+      title,
+      body,
+      anonymous,
+      private: priv,
+      replies: updatedReplies,
+    });
+    setReply('');
+  };
+
+  const handleReplyChange = (e) => {
+    setReply(e.target.value);
+  };
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -25,7 +46,7 @@ function PostCard(props) {
   const handleBodyChange = (e) => {
     setBody(e.target.value);
   };
-
+  
   const handleEdit = () => {
     setIsEditing(!isEditing);
   };
@@ -37,6 +58,7 @@ function PostCard(props) {
       body,
       anonymous,
       private: priv,
+      replies,
     });
     setIsEditing(!isEditing);
     setPrevTitle(title);
@@ -91,7 +113,10 @@ function PostCard(props) {
   return (
     <div>
       <div>
-        Question:
+        Question
+        {' '}
+        {id}
+        :
         {' '}
         {postTitle}
       </div>
@@ -101,11 +126,19 @@ function PostCard(props) {
         {postBody}
       </div>
       <div>
-        ID:
-        {' '}
-        {id}
+        {replies.map((txt) => (
+          <p>
+            {' '}
+            Reply:
+            {' '}
+            {txt}
+          </p>
+        ))}
       </div>
       <button data-testid="edit" id="edit" type="button" onClick={handleEdit}>Edit</button>
+      <br />
+      <input name="reply" type="input" id="reply" data-testid="reply" value={reply} onChange={handleReplyChange} />
+      <button data-testid="replyButton" id="replyButton" type="button" onClick={handleReplySubmit}>Reply</button>
     </div>
   );
 }

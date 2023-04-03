@@ -8,7 +8,7 @@ test('handleSave', () => {
   render(
     <PostCard
       posts={{
-        id: 1, title: 'title', body: 'body', anonymous: false, private: false,
+        id: 1, title: 'title', body: 'body', anonymous: false, private: false, replies: [],
       }}
       onEdit={onEditMock}
     />,
@@ -36,7 +36,7 @@ test('handleSave', () => {
 
 test('handleCancel', () => {
   render(<PostCard posts={{
-    id: 1, title: 'title', body: 'body', anonymous: false, private: false,
+    id: 1, title: 'title', body: 'body', anonymous: false, private: false, replies: [],
   }}
   />);
   const editButton = screen.getByTestId('edit');
@@ -50,6 +50,24 @@ test('handleCancel', () => {
   fireEvent.change(bodyInput, { target: { value: 'New Body' } });
   fireEvent.click(cancelButton);
   const linkElement = screen.getByTestId('edit');
+  expect(linkElement).toBeInTheDocument();
+});
+
+test('handleReply', () => {
+  render(
+    <PostCard
+      posts={{
+        id: 1, title: 'title', body: 'body', anonymous: false, private: false, replies: [],
+      }}
+    />,
+  );
+  const replyInput = screen.getByTestId('reply');
+  const replyButton = screen.getByTestId('replyButton');
+
+  fireEvent.change(replyInput, { target: { value: 'New reply' } });
+  fireEvent.click(replyButton);
+
+  const linkElement = screen.getByTestId('reply');
   expect(linkElement).toBeInTheDocument();
 });
 
