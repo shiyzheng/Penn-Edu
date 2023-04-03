@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import createNewPost from '../api/posts';
 
 function AddPost(props) {
   const { posts, addNewPost } = props;
@@ -34,6 +35,22 @@ function AddPost(props) {
     form.reset();
     addNewPost([...posts, newPost]);
   };
+
+  useEffect(() => {
+    async function createNewPostWrapper() {
+      const newPost = {
+        title,
+        body,
+        id,
+        private: priv,
+        anonymous: anon,
+      };
+      const response = await createNewPost(newPost);
+      // console.log('new post', response);
+      return response;
+    }
+    createNewPostWrapper();
+  }, [posts]);
 
   return (
     <div>

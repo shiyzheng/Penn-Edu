@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-
 import React, { useState } from 'react';
 
 function PostCard(props) {
@@ -47,7 +46,7 @@ function PostCard(props) {
   const handleBodyChange = (e) => {
     setBody(e.target.value);
   };
-
+  
   const handleEdit = () => {
     setIsEditing(!isEditing);
   };
@@ -91,8 +90,8 @@ function PostCard(props) {
             className="form-check-input"
             type="checkbox"
             id="Private"
-            checked={priv}
-            onChange={() => setPriv(!priv)}
+            defaultChecked={priv}
+            onClick={() => setPriv(!priv)}
           />
           Private
         </div>
@@ -101,8 +100,8 @@ function PostCard(props) {
             className="form-check-input"
             type="checkbox"
             id="Anonymous"
-            checked={anonymous}
-            onChange={() => setAnonymous(!anonymous)}
+            defaultChecked={anonymous}
+            onClick={() => setAnonymous(!anonymous)}
           />
           Anonymous
         </div>

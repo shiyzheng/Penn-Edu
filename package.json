@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.3.4",
     "json-server": "^0.17.2",
+    "parcel": "^2.8.3",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -18,7 +19,7 @@
   },
   "scripts": {
     "start": "react-scripts start ",
-    "build": "react-scripts build",
+    "build": "parcel src/index.html",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\" --coverage",
     "lint": "eslint \"**/*.{js,jsx}\" --ignore-pattern *.test.js --ignore-pattern *.test.jsx",
     "uitest": "jest --coverage",
@@ -44,11 +45,13 @@
     ]
   },
   "devDependencies": {
+    "buffer": "^5.7.1",
     "eslint": "^8.36.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.32.2",
-    "eslint-plugin-react-hooks": "^4.6.0"
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "process": "^0.11.10"
   }
 }
