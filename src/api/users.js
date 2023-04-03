@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {
-    Routes, Route, Outlet, Link, useNavigate, redirect,
-  } from 'react-router-dom';
+  Routes, Route, Outlet, Link, useNavigate, redirect,
+} from 'react-router-dom';
 import { userURL } from '../utils/utils';
 
 export const getAllUsers = async () => {
@@ -26,11 +26,15 @@ export const getUserById = async (id) => {
 
 export const createUser = async (userObject) => {
   try {
+    if (userObject.username === '' || userObject.password === '') {
+      throw new Error('invalid username or password');
+    }
     const response = await axios.post(userURL, {
       username: userObject.username,
       password: userObject.password,
     });
     // useNavigate('/');
+    // window.location = '/';
     return response.data;
   } catch (err) {
     console.error('error', err.message);

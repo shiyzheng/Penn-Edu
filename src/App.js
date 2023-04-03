@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 // import './components/App.css';
 // import {
@@ -100,8 +101,9 @@ function App() {
   //   </div>
   // );
 }
-function Home() {
+function Home(props) {
   // console.log('homepage');
+  // const { login } = props;
   return (
     <>
       {' '}

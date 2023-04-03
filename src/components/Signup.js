@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
-  Routes, Route, Outlet, Link, useNavigate, redirect,
+  Link, useNavigate,
 } from 'react-router-dom';
 import { createUser } from '../api/users';
 
@@ -30,9 +30,8 @@ function Signup(props) {
       <button
         className="btn btn-primary"
         onClick={() => {
-          createUser({ username, password });
           setLogin(true);
-          console.log(login);
+          createUser({ username, password });
         }}
         type="submit"
       >
@@ -43,6 +42,7 @@ function Signup(props) {
         {'Already have an account? '}
         <Link to="/login">Log in here!</Link>
       </p>
+      <Link to="/">Home</Link>
     </div>
   );
 }
