@@ -30,6 +30,28 @@
           "body": "help"
         }
       ]
+    },
+    {
+      "name": "asd",
+      "admins": [
+        "asd"
+      ],
+      "users": [
+        "asd"
+      ],
+      "posts": [],
+      "id": 2
+    },
+    {
+      "name": "classroom 2",
+      "admins": [
+        "asd"
+      ],
+      "users": [
+        "asd"
+      ],
+      "posts": [],
+      "id": 3
     }
   ],
   "users": [
@@ -39,19 +61,14 @@
       "password": "password"
     },
     {
-      "username": "asd",
-      "password": "asd",
+      "username": "asd123",
+      "password": "asdasd",
       "id": 2
     },
     {
-      "username": "asd",
+      "username": "asdzxc",
       "password": "asd",
       "id": 3
-    },
-    {
-      "username": "asd",
-      "password": "asd",
-      "id": 4
     }
   ]
 }

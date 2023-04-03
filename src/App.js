@@ -35,7 +35,7 @@
 import './components/App.css';
 import React, { useState } from 'react';
 // import axios from 'axios';
-import { useRoutes } from 'react-router-dom';
+import { useRoutes, Link } from 'react-router-dom';
 import ClassroomView from './components/ClassroomView';
 import AddClassroom from './components/AddClassroom';
 import Login from './components/Login';
@@ -46,6 +46,7 @@ function App() {
   const [login, setLogin] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [classrooms, setClassrooms] = useState([]);
   // const name = useRef('');
 
   // const checkLogged = async () => {
@@ -58,10 +59,10 @@ function App() {
   // };
   // checkLogged();
   // console.log('a');
-  const element = useRoutes([{ path: '/', element: <Home login={login} /> },
+  const element = useRoutes([{ path: '/', element: <Home login={login} username={username} /> },
     { path: '/Login', element: <Login setLogin={setLogin} /> },
     { path: '/Signup', element: <Signup setLogin={setLogin} setUsername={setUsername} setPassword={setPassword} username={username} password={password} login={login} /> },
-    { path: '/Home', element: <Classrooms /> },
+    { path: '/Home', element: <Classrooms classrooms={classrooms} setClassrooms={setClassrooms} username={username} /> },
     { path: '/Classroom', element: <ClassroomView /> },
     { path: '/AddClassroom', element: <AddClassroom /> },
   ]);
@@ -103,12 +104,31 @@ function App() {
 }
 function Home(props) {
   // console.log('homepage');
-  // const { login } = props;
+  const { login, username } = props;
   return (
-    <>
-      {' '}
-      Home Page.
-    </>
+    <div className="container">
+      {!login && (
+        <div>
+          {' '}
+          Home Page
+          <br />
+          <Link to="/login">Login</Link>
+          <br />
+          <Link to="/signup">Signup</Link>
+          <br />
+        </div>
+      )}
+      {login && (
+        <div>
+          <div>
+            Welcome
+            {' '}
+            {username}
+          </div>
+          <Link to="/home">Classrooms</Link>
+        </div>
+      )}
+    </div>
   );
 }
 export default App;

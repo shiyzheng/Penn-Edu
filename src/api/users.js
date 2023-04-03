@@ -1,7 +1,4 @@
 import axios from 'axios';
-import {
-  Routes, Route, Outlet, Link, useNavigate, redirect,
-} from 'react-router-dom';
 import { userURL } from '../utils/utils';
 
 export const getAllUsers = async () => {
