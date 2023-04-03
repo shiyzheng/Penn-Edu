@@ -1,3 +1,6 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
 
 import React, { useState } from 'react';
 
@@ -17,18 +20,30 @@ function PostCard(props) {
   const [prevAnonymous, setPrevAnonymous] = useState(postAnonymous);
   const [prevPriv, setPrevPriv] = useState(postPriv);
   const [isEditing, setIsEditing] = useState(false);
+  const [reply, setReply] = useState('');
+  const [replies, setReplies] = useState([]);
 
-    const handleTitleChange = (e) => {
-        setTitle(e.target.value);
-    };
+  const handleReplySubmit = (e) => {
+    e.preventDefault();
+    setReply('');
+    setReplies([...replies, reply]);
+  };
 
-    const handleBodyChange = (e) => {
-        setBody(e.target.value);
-    };
+  const handleReplyChange = (e) => {
+    setReply(e.target.value);
+  };
 
-    const handleEdit = () => {
-        setIsEditing(!isEditing);
-    };
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleBodyChange = (e) => {
+    setBody(e.target.value);
+  };
+
+  const handleEdit = () => {
+    setIsEditing(!isEditing);
+  };
 
   const handleSave = () => {
     props.onEdit({
@@ -69,7 +84,7 @@ function PostCard(props) {
             type="checkbox"
             id="Private"
             checked={priv}
-            onClick={() => setPriv(!priv)}
+            onChange={() => setPriv(!priv)}
           />
           Private
         </div>
@@ -79,7 +94,7 @@ function PostCard(props) {
             type="checkbox"
             id="Anonymous"
             checked={anonymous}
-            onClick={() => setAnonymous(!anonymous)}
+            onChange={() => setAnonymous(!anonymous)}
           />
           Anonymous
         </div>
@@ -91,7 +106,10 @@ function PostCard(props) {
   return (
     <div>
       <div>
-        Question:
+        Question
+        {' '}
+        {props.posts.id}
+        :
         {' '}
         {props.posts.title}
       </div>
@@ -101,46 +119,55 @@ function PostCard(props) {
         {props.posts.body}
       </div>
       <div>
-        ID:
-        {' '}
-        {props.posts.id}
+        {replies.map((txt) => (
+          <p>
+            {' '}
+            Reply:
+            {' '}
+            {txt}
+          </p>
+        ))}
       </div>
       <button data-testid="edit" id="edit" type="button" onClick={handleEdit}>Edit</button>
+      <br />
+      <input name="reply" type="input" id="reply" data-testid="reply" value={reply} onChange={handleReplyChange} />
+      <button data-testid="replyButton" id="replyButton" type="button" onClick={handleReplySubmit}>Reply</button>
     </div>
   );
 }
 
 function Posts(props) {
-    const displayPosts = () => {
-        const displayedPosts = [];
-        props.posts.forEach(element => {
-            if (props.title === '') {
-                displayedPosts.push(
-                    <PostCard posts={element} onEdit={handleEditPosts} />);
-            } else {
-                if (element.title.includes(props.title)) {
-                    displayedPosts.push(
-                        <PostCard posts={element} onEdit={handleEditPosts} />);
-                }
-            }
-        })
-        return displayedPosts;
-    }
-    
-    const handleEditPosts = (updatedPost) => {
-        const displayedPosts = [];
-        props.posts.forEach(element => {
-            if (element.id === updatedPost.id) {
-                displayedPosts.push(
-                    updatedPost);
-            } else {
-                displayedPosts.push(
-                    element);
-            }
-        })
-        props.editPosts(displayedPosts);
-    }
+  const displayPosts = () => {
+    const displayedPosts = [];
+    props.posts.forEach((element) => {
+      if (props.title === '') {
+        displayedPosts.push(
+          <PostCard posts={element} onEdit={handleEditPosts} />,
+        );
+      } else if (element.title.includes(props.title)) {
+        displayedPosts.push(
+          <PostCard posts={element} onEdit={handleEditPosts} />,
+        );
+      }
+    });
+    return displayedPosts;
+  };
 
+  const handleEditPosts = (updatedPost) => {
+    const displayedPosts = [];
+    props.posts.forEach((element) => {
+      if (element.id === updatedPost.id) {
+        displayedPosts.push(
+          updatedPost,
+        );
+      } else {
+        displayedPosts.push(
+          element,
+        );
+      }
+    });
+    props.editPosts(displayedPosts);
+  };
 
   const displayedPosts = displayPosts();
   return (
