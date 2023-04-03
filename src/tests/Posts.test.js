@@ -64,7 +64,7 @@ test('handleReply', () => {
   const replyInput = screen.getByTestId('reply');
   const replyButton = screen.getByTestId('replyButton');
 
-  fireEvent.change(replyInput, { target: { value: 'New Reply' } });
+  fireEvent.change(replyInput, { target: { value: 'New reply' } });
   fireEvent.click(replyButton);
 
   const linkElement = screen.getByTestId('reply');

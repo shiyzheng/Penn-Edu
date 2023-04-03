@@ -1,13 +1,12 @@
-/* eslint-disable no-use-before-define */
-/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 
 import React, { useState } from 'react';
 
 function PostCard(props) {
-  const { posts } = props;
+  const { posts, onEdit } = props;
   const {
-    title: postTitle, body: postBody, anonymous: postAnonymous, private: postPriv,
+    title: postTitle, body: postBody, anonymous: postAnonymous, private: postPriv, id,
+    replies: postReplies,
   } = posts;
 
   const [title, setTitle] = useState(postTitle);
@@ -21,12 +20,20 @@ function PostCard(props) {
   const [prevPriv, setPrevPriv] = useState(postPriv);
   const [isEditing, setIsEditing] = useState(false);
   const [reply, setReply] = useState('');
-  const [replies, setReplies] = useState([]);
+  const [replies, setReplies] = useState(postReplies);
 
-  const handleReplySubmit = (e) => {
-    e.preventDefault();
+  const handleReplySubmit = () => {
+    const updatedReplies = [...replies, reply];
+    setReplies(updatedReplies);
+    onEdit({
+      id,
+      title,
+      body,
+      anonymous,
+      private: priv,
+      replies: updatedReplies,
+    });
     setReply('');
-    setReplies([...replies, reply]);
   };
 
   const handleReplyChange = (e) => {
@@ -46,12 +53,13 @@ function PostCard(props) {
   };
 
   const handleSave = () => {
-    props.onEdit({
-      id: props.posts.id,
+    onEdit({
+      id,
       title,
       body,
       anonymous,
       private: priv,
+      replies,
     });
     setIsEditing(!isEditing);
     setPrevTitle(title);
@@ -108,15 +116,15 @@ function PostCard(props) {
       <div>
         Question
         {' '}
-        {props.posts.id}
+        {id}
         :
         {' '}
-        {props.posts.title}
+        {postTitle}
       </div>
       <div>
         Body:
         {' '}
-        {props.posts.body}
+        {postBody}
       </div>
       <div>
         {replies.map((txt) => (
@@ -137,25 +145,10 @@ function PostCard(props) {
 }
 
 function Posts(props) {
-  const displayPosts = () => {
-    const displayedPosts = [];
-    props.posts.forEach((element) => {
-      if (props.title === '') {
-        displayedPosts.push(
-          <PostCard posts={element} onEdit={handleEditPosts} />,
-        );
-      } else if (element.title.includes(props.title)) {
-        displayedPosts.push(
-          <PostCard posts={element} onEdit={handleEditPosts} />,
-        );
-      }
-    });
-    return displayedPosts;
-  };
-
+  const { posts, title, editPosts } = props;
   const handleEditPosts = (updatedPost) => {
     const displayedPosts = [];
-    props.posts.forEach((element) => {
+    posts.forEach((element) => {
       if (element.id === updatedPost.id) {
         displayedPosts.push(
           updatedPost,
@@ -166,7 +159,23 @@ function Posts(props) {
         );
       }
     });
-    props.editPosts(displayedPosts);
+    editPosts(displayedPosts);
+  };
+
+  const displayPosts = () => {
+    const displayedPosts = [];
+    posts.forEach((element) => {
+      if (title === '') {
+        displayedPosts.push(
+          <PostCard posts={element} onEdit={handleEditPosts} />,
+        );
+      } else if (element.title.includes(title)) {
+        displayedPosts.push(
+          <PostCard posts={element} onEdit={handleEditPosts} />,
+        );
+      }
+    });
+    return displayedPosts;
   };
 
   const displayedPosts = displayPosts();
