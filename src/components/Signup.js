@@ -42,7 +42,7 @@ function Signup(props) {
         {'Already have an account? '}
         <Link to="/login">Log in here!</Link>
       </p>
-      <Link to="/">Home</Link>
+      <Link to="/home">Home</Link>
     </div>
   );
 }

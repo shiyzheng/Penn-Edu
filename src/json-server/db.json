@@ -37,21 +37,6 @@
       "id": 1,
       "username": "username",
       "password": "password"
-    },
-    {
-      "username": "asd",
-      "password": "asd",
-      "id": 2
-    },
-    {
-      "username": "asd",
-      "password": "asd",
-      "id": 3
-    },
-    {
-      "username": "asd",
-      "password": "asd",
-      "id": 4
     }
   ]
 }
