@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
-import createNewPost from '../api/posts';
+import React, { useState } from 'react';
+// import createNewPost from '../api/posts';
 
 function AddPost(props) {
   const { posts, addNewPost } = props;
