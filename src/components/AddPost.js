@@ -36,21 +36,21 @@ function AddPost(props) {
     addNewPost([...posts, newPost]);
   };
 
-  useEffect(() => {
-    async function createNewPostWrapper() {
-      const newPost = {
-        title,
-        body,
-        id,
-        private: priv,
-        anonymous: anon,
-      };
-      const response = await createNewPost(newPost);
-      // console.log('new post', response);
-      return response;
-    }
-    createNewPostWrapper();
-  }, [posts]);
+  // useEffect(() => {
+  //   async function createNewPostWrapper() {
+  //     const newPost = {
+  //       title,
+  //       body,
+  //       id,
+  //       private: priv,
+  //       anonymous: anon,
+  //     };
+  //     const response = await createNewPost(newPost);
+  //     // console.log('new post', response);
+  //     return response;
+  //   }
+  //   createNewPostWrapper();
+  // }, [posts]);
 
   return (
     <div>

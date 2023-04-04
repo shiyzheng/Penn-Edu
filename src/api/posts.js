@@ -30,7 +30,7 @@ export const createNewClassroom = async (classroomObject) => {
 export const getAllPostsInClassroomById = async (id) => {
   try {
     const response = await axios.get(`${classroomURL}/${id}`);
-    return response.data;
+    return response.data.posts;
   } catch (err) {
     return err;
   }
