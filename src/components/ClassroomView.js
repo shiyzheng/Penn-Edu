@@ -26,7 +26,7 @@ function ClassroomView() {
   }, [posts.length]);
   return (
     <div>
-      <AddPost classroomId={id} setPosts={setPosts} />
+      <AddPost posts={posts} addNewPost={setPosts} />
       <FilterablePosts posts={posts} editPosts={setPosts} />
     </div>
   );
