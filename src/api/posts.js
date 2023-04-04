@@ -38,7 +38,7 @@ export const getAllPostsInClassroomById = async (id) => {
 
 // export const getPostById = async (id) => {
 //   try {
-//     const response = await axios.get(`${rootURL}/${id}`);
+//     const response = await axios.get(${rootURL}/${id});
 //     // console.log('a post', response.data);
 //     return response.data;
 //   } catch (err) {
@@ -47,14 +47,18 @@ export const getAllPostsInClassroomById = async (id) => {
 //   }
 // };
 
-export const createNewPost = async (classroomId, postObject) => {
+export const createNewPost = async (id, postObject) => {
   try {
-    const response = await axios.post(`${classroomURL}/${classroomId}`, {
+    const classroom = await axios.get(`${classroomURL}/${id}`);
+    classroom.data.posts.push({
       title: postObject.title,
       body: postObject.body,
       private: postObject.private,
+      id: postObject.id,
       anonymous: postObject.anonymous,
+      replies: postObject.replies,
     });
+    const response = await axios.put(`${classroomURL}/${id}`, classroom.data);
     // console.log('a response', response.data);
     return response.data;
   } catch (err) {

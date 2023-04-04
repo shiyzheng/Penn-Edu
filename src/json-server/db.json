@@ -11,7 +11,7 @@
       ],
       "posts": [
         {
-          "id": 1,
+          "id": 998,
           "title": "hw3 q5 help",
           "body": "help",
           "private": true,
@@ -19,14 +19,15 @@
           "replies": []
         },
         {
-          "id": 2,
+          "id": 999,
           "title": "hw1 q7 help",
           "body": "help",
           "private": true,
           "anonymous": false,
           "replies": []
         }
-      ]
+      ],
+      "number_of_posts": 2
     },
     {
       "name": "asd",
@@ -37,7 +38,8 @@
         "asd"
       ],
       "posts": [],
-      "id": 2
+      "id": 2,
+      "number_of_posts": 0
     },
     {
       "name": "classroom 2",
@@ -48,7 +50,8 @@
         "asd"
       ],
       "posts": [],
-      "id": 3
+      "id": 3,
+      "number_of_posts": 0
     }
   ],
   "users": [

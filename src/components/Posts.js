@@ -114,8 +114,8 @@ function PostCard(props) {
     <div>
       <div>
         Question
-        {' '}
-        {id}
+        {/* {' '} */}
+        {/* {id} */}
         :
         {' '}
         {postTitle}
