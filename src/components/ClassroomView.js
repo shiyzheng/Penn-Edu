@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { getAllPosts } from '../api/posts';
+import { useParams } from 'react-router-dom';
+import { getAllPostsInClassroomById } from '../api/posts';
 import AddPost from './AddPost';
 import FilterablePosts from './FilterablePosts';
 
 function ClassroomView() {
   const [posts, setPosts] = useState([]);
+  const { id } = useParams();
   useEffect(() => {
     async function getAllPostsWrapper() {
-      const response = await getAllPosts();
+      const response = await getAllPostsInClassroomById(id);
       // console.log('All posts', response);
       // response = await getPostById(3);
       // console.log('Post with id 3', response);
-      return response;
+      setPosts(response);
     }
     getAllPostsWrapper();
-
+    console.log(posts);
     // async function createNewPostWrapper() {
     //     const newPost = {"title":"hw1 q1 help", "body":"help"};
     //     let response = await createNewPost(newPost);
@@ -22,7 +24,7 @@ function ClassroomView() {
     //     return response;
     // }
     // createNewPostWrapper()
-  }, [posts]);
+  }, [posts.length]);
   return (
     <div>
       <AddPost posts={posts} addNewPost={setPosts} />

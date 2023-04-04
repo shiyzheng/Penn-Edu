@@ -46,7 +46,7 @@ function PostCard(props) {
   const handleBodyChange = (e) => {
     setBody(e.target.value);
   };
-  
+
   const handleEdit = () => {
     setIsEditing(!isEditing);
   };

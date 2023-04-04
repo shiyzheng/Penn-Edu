@@ -63,7 +63,7 @@ function App() {
     { path: '/Login', element: <Login setLogin={setLogin} /> },
     { path: '/Signup', element: <Signup setLogin={setLogin} setUsername={setUsername} setPassword={setPassword} username={username} password={password} login={login} /> },
     { path: '/Home', element: <Classrooms classrooms={classrooms} setClassrooms={setClassrooms} username={username} /> },
-    { path: '/Classroom', element: <ClassroomView /> },
+    { path: '/Classroom/:id', element: <ClassroomView /> },
     { path: '/AddClassroom', element: <AddClassroom /> },
   ]);
   return element;
