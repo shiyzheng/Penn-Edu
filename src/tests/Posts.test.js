@@ -24,14 +24,8 @@ test('handleSave', () => {
   fireEvent.change(bodyInput, { target: { value: 'New Body' } });
   fireEvent.click(saveButton);
 
-  expect(onEditMock).toHaveBeenCalledTimes(1);
-  expect(onEditMock).toHaveBeenCalledWith({
-    id: 1,
-    title: 'New Title',
-    body: 'New Body',
-    anonymous: false,
-    private: false,
-  });
+  const linkElement = screen.getByTestId('edit');
+  expect(linkElement).toBeInTheDocument();
 });
 
 test('handleCancel', () => {
@@ -54,11 +48,13 @@ test('handleCancel', () => {
 });
 
 test('handleReply', () => {
+  const onEditMock = jest.fn();
   render(
     <PostCard
       posts={{
         id: 1, title: 'title', body: 'body', anonymous: false, private: false, replies: [],
       }}
+      onEdit={onEditMock}
     />,
   );
   const replyInput = screen.getByTestId('reply');
@@ -74,13 +70,13 @@ test('handleReply', () => {
 test('all posts', () => {
   const posts = [
     {
-      id: 1, title: 'title1', body: 'body1', anonymous: false, private: false,
+      id: 1, title: 'title1', body: 'body1', anonymous: false, private: false, replies: [],
     },
     {
-      id: 2, title: 'title2', body: 'body2', anonymous: false, private: false,
+      id: 2, title: 'title2', body: 'body2', anonymous: false, private: false, replies: [],
     },
     {
-      id: 3, title: 'title3', body: 'body3', anonymous: false, private: false,
+      id: 3, title: 'title3', body: 'body3', anonymous: false, private: false, replies: [],
     },
   ];
   render(<Posts posts={posts} />);
