@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-// import createNewPost from '../api/posts';
+import { createNewPost } from '../api/posts';
 
 function AddPost(props) {
-  const { posts, addNewPost } = props;
+  const { classroomId, setPosts } = props;
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [priv, setPriv] = useState(false);
@@ -33,24 +33,9 @@ function AddPost(props) {
     setId(id + 1);
     const form = document.getElementById('add');
     form.reset();
-    addNewPost([...posts, newPost]);
+    setPosts([]);
+    createNewPost(classroomId, newPost);
   };
-
-  // useEffect(() => {
-  //   async function createNewPostWrapper() {
-  //     const newPost = {
-  //       title,
-  //       body,
-  //       id,
-  //       private: priv,
-  //       anonymous: anon,
-  //     };
-  //     const response = await createNewPost(newPost);
-  //     // console.log('new post', response);
-  //     return response;
-  //   }
-  //   createNewPostWrapper();
-  // }, [posts]);
 
   return (
     <div>
