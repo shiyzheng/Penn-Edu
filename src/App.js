@@ -35,7 +35,14 @@
 import './components/App.css';
 import React, { useState } from 'react';
 // import axios from 'axios';
-import { useRoutes, Link } from 'react-router-dom';
+import {
+  useRoutes,
+  // BrowserRouter as Router, Route, Routes,
+  Link,
+} from 'react-router-dom';
+// import {
+//   BrowserRouter as Router, Link, Route, Routes,
+// } from 'react-router-dom';
 import ClassroomView from './components/ClassroomView';
 import AddClassroom from './components/AddClassroom';
 import Login from './components/Login';
@@ -59,6 +66,7 @@ function App() {
   // };
   // checkLogged();
   // console.log('a');
+
   const element = useRoutes([{ path: '/', element: <Home login={login} username={username} /> },
     { path: '/Login', element: <Login setLogin={setLogin} /> },
     { path: '/Signup', element: <Signup setLogin={setLogin} setUsername={setUsername} setPassword={setPassword} username={username} password={password} login={login} /> },
@@ -67,6 +75,25 @@ function App() {
     { path: '/AddClassroom', element: <AddClassroom /> },
   ]);
   return element;
+
+  // return (
+  //   <Router>
+  //     <Routes>
+  //       <Route path="/" render={() => (<Home login={login} username={username} />)} />
+  //       <Route path="/Login" render={() => <Login setLogin={setLogin} />} />
+  //       <Route path="/Signup'" render={() => <Signup setLogin={setLogin}
+  // setUsername={setUsername} setPassword={setPassword}
+  // username={username} password={password} login={login} />} />
+  //       <Route path="/Home" render={() => <Classrooms classrooms={classrooms}
+  // setClassrooms={setClassrooms} username={username} />} />
+  //       <Route path="/Classroom/:id" render={() => <ClassroomView />} />
+  //       <Route path="/AddClassroom" render={() => <AddClassroom />} />
+  //     </Routes>
+  //     {/* <Login /> */}
+  //     {/* <AddClassroom /> */}
+  //     {/* <ClassroomView /> */}
+  //   </Router>
+  // );
 
   // const handleClick = () => {
   //   setLogin(!login);

@@ -168,7 +168,8 @@ function Posts(props) {
         displayedPosts.push(
           <PostCard posts={element} onEdit={handleEditPosts} />,
         );
-      } else if (element.title.includes(title)) {
+      } else if (element.title.toLowerCase().includes(title.toLowerCase())
+      || element.body.toLowerCase().includes(title.toLowerCase())) {
         displayedPosts.push(
           <PostCard posts={element} onEdit={handleEditPosts} />,
         );

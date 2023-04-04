@@ -21,25 +21,28 @@ function Signup(props) {
       <form id="add" className="mx-auto" style={{ width: '800px' }}>
         <h2>Signup</h2>
         <div className="form-group">
-          <label className="form-check-label" htmlFor="Username">
+          <label htmlFor="Username">
             Username
-            <input type="text" className="form-control" id="username" onChange={(e) => setUsername(e.target.value)} />
+            <input type="text" className="form-control" id="Username" onChange={(e) => setUsername(e.target.value)} />
           </label>
           <br />
         </div>
         <div className="form-group">
-          <label className="form-check-label" htmlFor="Password">
+          <label htmlFor="Password">
             Password
-            <input type="text" className="form-control" id="username" onChange={(e) => setPassword(e.target.value)} />
+            <input type="text" className="form-control" id="Password" onChange={(e) => setPassword(e.target.value)} />
           </label>
           <br />
         </div>
         <button
           className="btn btn-primary"
+          data-testid="button"
           onClick={(e) => {
             e.preventDefault();
             setLogin(true);
             createUser({ username, password });
+            const form = document.getElementById('add');
+            form.reset();
           }}
           type="submit"
         >

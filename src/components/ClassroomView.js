@@ -16,7 +16,6 @@ function ClassroomView() {
       setPosts(response);
     }
     getAllPostsWrapper();
-    console.log(posts);
     // async function createNewPostWrapper() {
     //     const newPost = {"title":"hw1 q1 help", "body":"help"};
     //     let response = await createNewPost(newPost);
