@@ -126,7 +126,7 @@ function PostCard(props) {
         {postBody}
       </div>
       <div>
-        {replies.map((txt) => (
+        {replies?.map((txt) => (
           <p>
             {' '}
             Reply:

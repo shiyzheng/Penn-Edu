@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
 import {
@@ -23,7 +24,6 @@ function Classrooms(props) {
     const getClassroomsWrapper = async () => {
       try {
         const response = await getAllClassrooms();
-        console.log(response);
         // const arr = [response];
         setClassrooms(response);
       } catch (err) {
@@ -40,7 +40,7 @@ function Classrooms(props) {
         <ClassroomPreview
           key={element.id}
           name={element.name}
-          id={element.id}
+          id={element._id}
         />,
       );
     });

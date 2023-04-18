@@ -33,8 +33,8 @@ function AddPost(props) {
     setId(id + 1);
     const form = document.getElementById('add');
     form.reset();
-    setPosts([]);
     createNewPost(classroomId, newPost);
+    setPosts([]);
   };
 
   return (

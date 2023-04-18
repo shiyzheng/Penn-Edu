@@ -17,6 +17,7 @@ const classroomSchema = new Schema({
   admins: [{ type: String }],
   users: [{ type: String, required: true }],
   posts: [postSchema],
+  // posts: [{ type: Object }],
 });
 
 const Classroom = model('Classroom', classroomSchema);
