@@ -12,7 +12,7 @@ router.post('/signup', async (req, res) => {
     if (!user) {
       await User.create({ username, password });
       console.log(username);
-      console.log(req.session)
+      console.log(req.session);
       req.session.username = username;
       res.send('succesful signup');
     } else {
@@ -20,7 +20,7 @@ router.post('/signup', async (req, res) => {
     }
   } catch (e) {
     console.log(e);
-    console.log('error occured')
+    console.log('error occured');
     res.send(e);
   }
 });
@@ -46,6 +46,7 @@ router.post('/logout', (req, res) => {
   res.send('you logged out');
 });
 router.get('/isLogged', (req, res) => {
+  console.log(req);
   res.json(req.session.username);
 });
 

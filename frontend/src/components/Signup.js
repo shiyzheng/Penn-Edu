@@ -3,7 +3,8 @@ import React from 'react';
 import {
   Link, useNavigate,
 } from 'react-router-dom';
-import { createUser } from '../api/users';
+import axios from 'axios';
+// import createUser from '../api/users';
 
 function Signup(props) {
   // signup page
@@ -11,9 +12,32 @@ function Signup(props) {
     setLogin, setUsername, setPassword, username, password, login,
   } = props;
 
+  const navigate = useNavigate();
+
   if (login) {
-    useNavigate('/');
+    navigate('/');
   }
+
+  const createUser = async (userObject) => {
+    // console.log('atapi');
+    try {
+      // if (userObject.username === '' || userObject.password === '') {
+      //   throw new Error('invalid username or password');
+      // }
+      const response = await axios.post('/account/signup', {
+        username: userObject.username,
+        password: userObject.password,
+      });
+      // console.log(response);
+      if (response.data === 'user creation failed') {
+        throw new Error('user creation failed');
+      }
+      navigate('/');
+    } catch (err) {
+      console.error('error', err.message);
+      alert('user signup failed');
+    }
+  };
 
   return (
     <div className="container">

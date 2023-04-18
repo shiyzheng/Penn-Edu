@@ -21,7 +21,7 @@ router.post('/create', async (req, res) => {
       res.send('name taken');
     }
   } catch (e) {
-    console.log(e)
+    console.log(e);
     res.send('error occured');
   }
 });
@@ -36,9 +36,12 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/getId', async (req, res) => {
-  const { body } = req;
-  const { id } = body;
+  const { id } = req.query;
+  // const { id } = body;
   try {
+    // console.log(id);
+    // console.log(req.query);
+    // console.log(id);
     const classroom = await Classroom.findOne({ _id: id });
     res.json(classroom.posts);
   } catch (e) {
@@ -56,13 +59,52 @@ router.post('/addPost', async (req, res) => {
       const newPost = new Post({
         title, body, private: priv, anonymous, replies, author: req.session.username,
       });
-      classroom.posts.push(newPost);
+      const arr = [...classroom.posts, newPost];
+      await Classroom.updateOne({ _id: id }, { posts: arr });
       res.send('succesful post creation');
     } else {
       res.send('classroom does not exist');
     }
   } catch (e) {
     res.send('error occured');
+  }
+});
+
+// await Post.updateOne({ _id }, { $set: { post.title : postTitle,
+//         post.body : postBody,
+//         post.private : postPriv,
+//         post.anonymous : postAnonymous,
+//         post.replies : postReplies } })
+router.put('/editPost', async (req, res) => {
+  const {
+    classroomId,
+    postId,
+    postTitle,
+    postBody,
+    postAnonymous,
+    postPriv,
+    postReplies,
+  } = req.body;
+  try {
+    const classroom = await Classroom.findOne({ _id: classroomId });
+    if (classroom) {
+      const post = classroom.posts.id(postId);
+      if (post) {
+        post.title = postTitle;
+        post.body = postBody;
+        post.private = postPriv;
+        post.anonymous = postAnonymous;
+        post.replies = postReplies;
+        await classroom.save();
+        res.send('successful post update');
+      } else {
+        res.send('post does not exist');
+      }
+    } else {
+      res.send('classroom does not exist');
+    }
+  } catch (e) {
+    res.send('error occurred');
   }
 });
 
