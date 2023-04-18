@@ -57,7 +57,6 @@ export const createNewPost = async (classroomId, postObject) => {
     const response = await axios.post('/classroom/addPost', {
       title, body, priv, id: classroomId, anonymous, replies,
     });
-    console.log(response);
     // console.log('a response', response.data);
     return response;
   } catch (err) {
