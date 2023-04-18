@@ -15,9 +15,7 @@ mongoose.connect(MONGO_URI, {
 });
 app.use(express.json());
 app.use(express.static('dist'));
-app.use('/account', AccountRouter);
 
-app.use('/classroom', ClassroomRouter);
 app.use(cookieSession({
   name: 'session',
   keys: ['pineapple'],
@@ -25,7 +23,9 @@ app.use(cookieSession({
   // Cookie Options
   maxAge: 24 * 60 * 60 * 1000, // 24 hours
 }));
+app.use('/account', AccountRouter);
 
+app.use('/classroom', ClassroomRouter);
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'));
 });

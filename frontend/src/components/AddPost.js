@@ -26,7 +26,7 @@ function AddPost(props) {
       title,
       body,
       id,
-      private: priv,
+      priv,
       anonymous: anon,
       replies: [],
     };

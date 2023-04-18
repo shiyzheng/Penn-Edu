@@ -8,19 +8,20 @@ const router = express.Router();
 router.post('/create', async (req, res) => {
   const { body } = req;
   const {
-    name, admins, users, posts,
+    name, posts,
   } = body;
   try {
     const classroom = await Classroom.findOne({ name });
     if (!classroom) {
       await Classroom.create({
-        name, admins, users, posts,
+        name, admins: [req.session.username], users: [req.session.username], posts,
       });
       res.send('succesful classroom creation');
     } else {
       res.send('name taken');
     }
   } catch (e) {
+    console.log(e)
     res.send('error occured');
   }
 });
@@ -55,7 +56,7 @@ router.post('/addPost', async (req, res) => {
       const newPost = new Post({
         title, body, private: priv, anonymous, replies, author: req.session.username,
       });
-      classroom.post.push(newPost);
+      classroom.posts.push(newPost);
       res.send('succesful post creation');
     } else {
       res.send('classroom does not exist');
@@ -64,3 +65,5 @@ router.post('/addPost', async (req, res) => {
     res.send('error occured');
   }
 });
+
+module.exports = router;

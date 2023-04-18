@@ -11,13 +11,17 @@ router.post('/signup', async (req, res) => {
     const user = await User.findOne({ username });
     if (!user) {
       await User.create({ username, password });
+      console.log(username);
+      console.log(req.session)
       req.session.username = username;
       res.send('succesful signup');
     } else {
       res.send('username taken');
     }
   } catch (e) {
-    res.send('error occured');
+    console.log(e);
+    console.log('error occured')
+    res.send(e);
   }
 });
 
@@ -45,14 +49,4 @@ router.get('/isLogged', (req, res) => {
   res.json(req.session.username);
 });
 
-// router.post('/getUserById', async (req, res) => {
-//   const { body } = req;
-//   const { id } = body;
-//   try {
-//     const user = await User.findOne({ _id: id });
-//     return
-//   } catch (e) {
-//     next(e);
-//   }
-// });
 module.exports = router;
