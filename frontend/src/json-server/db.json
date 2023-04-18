@@ -25,6 +25,14 @@
           "private": true,
           "anonymous": false,
           "replies": []
+        },
+        {
+          "title": "question 1",
+          "body": "a",
+          "private": false,
+          "id": 1,
+          "anonymous": false,
+          "replies": []
         }
       ],
       "number_of_posts": 2
@@ -52,6 +60,17 @@
       "posts": [],
       "id": 3,
       "number_of_posts": 0
+    },
+    {
+      "name": "cis 350",
+      "admins": [
+        "a"
+      ],
+      "users": [
+        "a"
+      ],
+      "posts": [],
+      "id": 4
     }
   ],
   "users": [
@@ -79,6 +98,11 @@
       "username": "asd",
       "password": "zxc",
       "id": 5
+    },
+    {
+      "username": "a",
+      "password": "a",
+      "id": 6
     }
   ]
 }
