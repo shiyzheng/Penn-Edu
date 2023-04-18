@@ -48,7 +48,7 @@ function PostCard(props) {
       setIsAuthor(author === currentUser);
     };
     checkAuthor();
-  }, [author]);
+  }, posts);
 
   const handleReplySubmit = () => {
     const replies1 = Array.isArray(replies) ? replies : [replies];
@@ -165,44 +165,62 @@ function PostCard(props) {
       </div>
     );
   }
-  return (
-    <div className="row">
-      <div className="col-md-3">
-        <div className="card">
-          <div>
+  if (!anonymous || isAuthor) {
+    return (
+      <div className="row">
+        <div className="col-md-3">
+          <div className="card">
             <div>
-              Question:
-              {' '}
-              {postTitle}
+              <div>
+                {anonymous ? (
+                  <div>
+                    Author:
+                    {' '}
+                    Anonymous
+                  </div>
+                ) : (
+                  <div>
+                    Author:
+                    {' '}
+                    {author}
+                  </div>
+                )}
+              </div>
+              <div>
+                Question:
+                {' '}
+                {postTitle}
+              </div>
+              <div>
+                Body:
+                {' '}
+                {postBody}
+              </div>
+              <div>
+                {replies?.map((txt) => (
+                  <p>
+                    {' '}
+                    Reply:
+                    {' '}
+                    {txt}
+                  </p>
+                ))}
+              </div>
+              {isAuthor ? (
+                <button className="btn btn-warning" data-testid="edit" id="edit" type="button" onClick={handleEdit}>Edit</button>
+              ) : (
+                null
+              )}
+              <br />
+              <input className="form-control d-inline-block" style={{ width: '200px' }} name="reply" type="input" id="reply" data-testid="reply" value={reply} onChange={handleReplyChange} />
+              <button className="btn btn-primary" data-testid="replyButton" id="replyButton" type="button" onClick={handleReplySubmit}>Reply</button>
             </div>
-            <div>
-              Body:
-              {' '}
-              {postBody}
-            </div>
-            <div>
-              {replies?.map((txt) => (
-                <p>
-                  {' '}
-                  Reply:
-                  {' '}
-                  {txt}
-                </p>
-              ))}
-            </div>
-            {isAuthor ? (
-              <button className="btn btn-warning" data-testid="edit" id="edit" type="button" onClick={handleEdit}>Edit</button>
-            ) : (
-              null
-            )}
-            <br />
-            <input className="form-control d-inline-block" style={{ width: '200px' }} name="reply" type="input" id="reply" data-testid="reply" value={reply} onChange={handleReplyChange} />
-            <button className="btn btn-primary" data-testid="replyButton" id="replyButton" type="button" onClick={handleReplySubmit}>Reply</button>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
+  return null;
 }
 
 function Posts(props) {
