@@ -24,7 +24,6 @@ function Classrooms(props) {
     const getClassroomsWrapper = async () => {
       try {
         const response = await getAllClassrooms();
-        console.log(response);
         // const arr = [response];
         setClassrooms(response);
       } catch (err) {

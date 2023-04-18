@@ -22,7 +22,7 @@ import axios from 'axios';
 // };
 
 const createUser = async (userObject) => {
-  console.log('atapi');
+  // console.log('atapi');
   try {
     if (userObject.username === '' || userObject.password === '') {
       throw new Error('invalid username or password');

@@ -8,7 +8,6 @@ function AddClassroom(props) {
   const handleClassroomNameChange = (e) => {
     setClassroomName(e.target.value);
   };
-
   const add = (e) => {
     try {
       e.preventDefault();

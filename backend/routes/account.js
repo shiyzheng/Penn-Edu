@@ -14,7 +14,7 @@ router.post('/signup', async (req, res) => {
       console.log(username);
       console.log(req.session);
       req.session.username = username;
-      res.send('succesful signup');
+      res.send('user creation was successful');
     } else {
       res.send('username taken');
     }
@@ -32,9 +32,10 @@ router.post('/login', async (req, res) => {
     const user = await User.findOne({ username });
     if (user.password === password) {
       req.session.username = username;
-      res.send('successful login');
+      console.log(req.session.username);
+      res.send('you are logged in');
     } else {
-      res.send('incorrect username or password');
+      throw new Error('incorrect username or password');
     }
   } catch (e) {
     res.send('error occured');
@@ -45,6 +46,7 @@ router.post('/logout', (req, res) => {
   req.session.username = null;
   res.send('you logged out');
 });
+
 router.get('/isLogged', (req, res) => {
   console.log(req);
   res.json(req.session.username);
