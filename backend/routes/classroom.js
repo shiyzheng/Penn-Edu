@@ -8,15 +8,21 @@ const router = express.Router();
 router.post('/create', async (req, res) => {
   const { body } = req;
   const {
-    name, posts,
+    name, posts, username,
   } = body;
   try {
     const classroom = await Classroom.findOne({ name });
     if (!classroom) {
-      await Classroom.create({
-        name, admins: [req.session.username], users: [req.session.username], posts,
-      });
-      res.send('succesful classroom creation');
+      if (!req.session.username) {
+        await Classroom.create({
+          name, admins: [username], users: [username], posts,
+        });
+      } else {
+        await Classroom.create({
+          name, admins: [req.session.username], users: [req.session.username], posts,
+        });
+      }
+      res.send('successful classroom creation');
     } else {
       res.send('name taken');
     }
@@ -62,7 +68,7 @@ router.post('/addPost', async (req, res) => {
       const arr = [...classroom.posts, newPost];
       await Classroom.updateOne({ _id: id }, { posts: arr });
       // await classroom.save();
-      res.send('succesful post creation');
+      res.send('successful post creation');
     } else {
       res.send('classroom does not exist');
     }

@@ -17,8 +17,8 @@ router.post('/signup', async (req, res) => {
       res.send('username taken');
     }
   } catch (e) {
-    console.log(e);
-    console.log('error occured');
+    // console.log(e);
+    // console.log('error occured');
     res.send('error occured');
   }
 });
@@ -30,6 +30,7 @@ router.post('/login', async (req, res) => {
     const user = await User.findOne({ username });
     if (user.password === password) {
       req.session.username = username;
+      console.log(req.session.username);
       res.send('you are logged in');
     } else {
       throw new Error('incorrect username or password');
