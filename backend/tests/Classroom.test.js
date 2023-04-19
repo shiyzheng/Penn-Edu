@@ -63,7 +63,7 @@ test('GET / should get all classrooms', async () => {
 
 test('POST /addpost should add post to classroom', async () => {
   const postObject = {
-    title: 'testing post title', body: 'testing post body', priv: false, anonymous: false, replies: [], id: '643ec14c46a7e82aa7af894a',
+    title: 'testing post title', body: 'testing post body', priv: false, anonymous: false, replies: [], id: '643e213686779d4f9cafb6cd',
   };
   const res = await request(app)
     .post('/classroom/addPost')
