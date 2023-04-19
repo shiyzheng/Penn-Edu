@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-undef */
 const request = require('supertest');
 const express = require('express');
@@ -71,6 +72,23 @@ test('POST /addpost should add post to classroom', async () => {
     .send(postObject);
   expect(res.statusCode).toEqual(200);
   expect(res.text).toEqual('successful post creation');
+});
+
+test('PUT /editpost with existing post should work', async () => {
+  // const postId = classroom.posts[0]._id;
+  const res = await request(app)
+    .put('/classroom/editPost')
+    .send({
+      classroomId: '643e4800aeb30ee48c3819e5',
+      postId: '643e4d638ef9fbd1fe151b08',
+      postTitle: 'New Post Title',
+      postBody: 'New Post Body',
+      postAnonymous: true,
+      postPriv: true,
+      postReplies: [],
+    });
+  expect(res.statusCode).toEqual(200);
+  expect(res.text).toEqual('successful post update');
 });
 // test('POST /login should log in a user', async () => {
 //   const res = await request(app)

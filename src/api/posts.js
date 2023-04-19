@@ -32,7 +32,6 @@ export const getAllPostsInClassroomById = async (id) => {
     const response = await axios.get('/classroom/getId', {
       params: { id },
     });
-    console.log(response);
     return response.data;
   } catch (err) {
     return err;
@@ -58,11 +57,35 @@ export const createNewPost = async (classroomId, postObject) => {
     const response = await axios.post('/classroom/addPost', {
       title, body, priv, id: classroomId, anonymous, replies,
     });
-    console.log(response);
     // console.log('a response', response.data);
     return response;
   } catch (err) {
     // console.error('error', err.message);
+    return err;
+  }
+};
+// put input post id? (:id) /${postId} /${classroomId}
+export const editPost = async (
+  classroomId,
+  postId,
+  postTitle,
+  postBody,
+  postAnonymous,
+  postPriv,
+  postReplies,
+) => {
+  try {
+    const response = await axios.put('/classroom/editPost', {
+      classroomId,
+      postId,
+      postTitle,
+      postBody,
+      postAnonymous,
+      postPriv,
+      postReplies,
+    });
+    return response;
+  } catch (err) {
     return err;
   }
 };

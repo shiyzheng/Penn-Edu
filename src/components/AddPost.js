@@ -61,24 +61,25 @@ function AddPost(props) {
         <div className="form-row">
           <div className="form-check col-md-4">
             <label className="form-check-label" htmlFor="Private">
-              Private
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <input
                 className="form-check-input"
                 type="checkbox"
                 id="Private"
                 onClick={() => setPriv(!priv)}
               />
+              Private
             </label>
           </div>
           <div className="form-check col-md-6 ">
             <label className="form-check-label" htmlFor="Anonymous">
-              Anonymous
               <input
                 className="form-check-input"
                 type="checkbox"
                 id="Anonymous"
                 onClick={() => setAnon(!anon)}
               />
+              Anonymous
             </label>
           </div>
           <button

@@ -45,9 +45,6 @@ router.get('/getId', async (req, res) => {
   const { id } = req.query;
   // const { id } = body;
   try {
-    // console.log(id);
-    // console.log(req.query);
-    // console.log(id);
     const classroom = await Classroom.findOne({ _id: id });
     res.json(classroom.posts);
   } catch (e) {
@@ -74,6 +71,44 @@ router.post('/addPost', async (req, res) => {
     }
   } catch (e) {
     res.send('error occured');
+  }
+});
+
+// await Post.updateOne({ _id }, { $set: { post.title : postTitle,
+//         post.body : postBody,
+//         post.private : postPriv,
+//         post.anonymous : postAnonymous,
+//         post.replies : postReplies } })
+router.put('/editPost', async (req, res) => {
+  const {
+    classroomId,
+    postId,
+    postTitle,
+    postBody,
+    postAnonymous,
+    postPriv,
+    postReplies,
+  } = req.body;
+  try {
+    const classroom = await Classroom.findOne({ _id: classroomId });
+    if (classroom) {
+      const post = classroom.posts.id(postId);
+      if (post) {
+        post.title = postTitle;
+        post.body = postBody;
+        post.private = postPriv;
+        post.anonymous = postAnonymous;
+        post.replies = postReplies;
+        await classroom.save();
+        res.send('successful post update');
+      } else {
+        res.send('post does not exist');
+      }
+    } else {
+      res.send('classroom does not exist');
+    }
+  } catch (e) {
+    res.send('error occurred');
   }
 });
 

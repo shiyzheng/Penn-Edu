@@ -29,7 +29,7 @@ function ClassroomView() {
   return (
     <div>
       <AddPost classroomId={id} setPosts={setPosts} />
-      <FilterablePosts posts={posts} editPosts={setPosts} />
+      <FilterablePosts classroomId={id} posts={posts} editPosts={setPosts} />
     </div>
   );
 }

@@ -26,7 +26,7 @@
   },
   "scripts": {
     "start": "react-scripts start ",
-    "build": "parcel frontend/src/index.html",
+    "build": "parcel src/index.html",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\" --coverage --watchAll",
     "lint": "eslint \"**/*.{js,jsx}\" --ignore-pattern *.test.js --ignore-pattern *.test.jsx",
     "uitest": "jest --coverage",
