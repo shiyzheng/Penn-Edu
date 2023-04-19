@@ -1,9 +1,8 @@
 import axios from 'axios';
-import { classroomURL } from '../utils/utils';
 
 export const getAllClassrooms = async () => {
   try {
-    const response = await axios.get(classroomURL);
+    const response = await axios.get('/classroom');
     return response.data;
   } catch (err) {
     return err;
@@ -15,13 +14,14 @@ export const createNewClassroom = async (classroomObject) => {
     const {
       name, admins, users, posts,
     } = classroomObject;
-    const response = await axios.post(classroomURL, {
+    const response = await axios.post('/classroom/create', {
       name,
       admins,
       users,
       posts,
     });
-    return response.data;
+    console.log(response);
+    return response;
   } catch (err) {
     return err;
   }
@@ -29,8 +29,10 @@ export const createNewClassroom = async (classroomObject) => {
 
 export const getAllPostsInClassroomById = async (id) => {
   try {
-    const response = await axios.get(`${classroomURL}/${id}`);
-    return response.data.posts;
+    const response = await axios.get('/classroom/getId', {
+      params: { id },
+    });
+    return response.data;
   } catch (err) {
     return err;
   }
@@ -47,22 +49,43 @@ export const getAllPostsInClassroomById = async (id) => {
 //   }
 // };
 
-export const createNewPost = async (id, postObject) => {
+export const createNewPost = async (classroomId, postObject) => {
   try {
-    const classroom = await axios.get(`${classroomURL}/${id}`);
-    classroom.data.posts.push({
-      title: postObject.title,
-      body: postObject.body,
-      private: postObject.private,
-      id: postObject.id,
-      anonymous: postObject.anonymous,
-      replies: postObject.replies,
+    const {
+      title, body, priv, anonymous, replies,
+    } = postObject;
+    const response = await axios.post('/classroom/addPost', {
+      title, body, priv, id: classroomId, anonymous, replies,
     });
-    const response = await axios.put(`${classroomURL}/${id}`, classroom.data);
     // console.log('a response', response.data);
-    return response.data;
+    return response;
   } catch (err) {
     // console.error('error', err.message);
+    return err;
+  }
+};
+// put input post id? (:id) /${postId} /${classroomId}
+export const editPost = async (
+  classroomId,
+  postId,
+  postTitle,
+  postBody,
+  postAnonymous,
+  postPriv,
+  postReplies,
+) => {
+  try {
+    const response = await axios.put('/classroom/editPost', {
+      classroomId,
+      postId,
+      postTitle,
+      postBody,
+      postAnonymous,
+      postPriv,
+      postReplies,
+    });
+    return response;
+  } catch (err) {
     return err;
   }
 };

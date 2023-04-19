@@ -9,10 +9,12 @@ function ClassroomView() {
   const { id } = useParams();
   useEffect(() => {
     async function getAllPostsWrapper() {
+      console.log(id);
       const response = await getAllPostsInClassroomById(id);
       // console.log('All posts', response);
       // response = await getPostById(3);
       // console.log('Post with id 3', response);
+      console.log(response);
       setPosts(response);
     }
     getAllPostsWrapper();
@@ -27,7 +29,7 @@ function ClassroomView() {
   return (
     <div>
       <AddPost classroomId={id} setPosts={setPosts} />
-      <FilterablePosts posts={posts} editPosts={setPosts} />
+      <FilterablePosts classroomId={id} posts={posts} editPosts={setPosts} />
     </div>
   );
 }

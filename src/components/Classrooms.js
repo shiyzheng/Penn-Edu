@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
 import {
@@ -39,7 +40,7 @@ function Classrooms(props) {
         <ClassroomPreview
           key={element.id}
           name={element.name}
-          id={element.id}
+          id={element._id}
         />,
       );
     });
