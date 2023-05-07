@@ -4,17 +4,13 @@ import { getAllPostsInClassroomById } from '../api/posts';
 import AddPost from './AddPost';
 import FilterablePosts from './FilterablePosts';
 
-function ClassroomView() {
+function ClassroomView(props) {
+  const { login, username } = props;
   const [posts, setPosts] = useState([]);
   const { id } = useParams();
   useEffect(() => {
     async function getAllPostsWrapper() {
-      console.log(id);
       const response = await getAllPostsInClassroomById(id);
-      // console.log('All posts', response);
-      // response = await getPostById(3);
-      // console.log('Post with id 3', response);
-      console.log(response);
       setPosts(response);
     }
     getAllPostsWrapper();
@@ -28,7 +24,7 @@ function ClassroomView() {
   }, [posts.length]);
   return (
     <div>
-      <AddPost classroomId={id} setPosts={setPosts} />
+      <AddPost login={login} classroomId={id} setPosts={setPosts} />
       <FilterablePosts classroomId={id} posts={posts} editPosts={setPosts} />
     </div>
   );

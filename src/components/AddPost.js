@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { createNewPost } from '../api/posts';
 
 function AddPost(props) {
-  const { classroomId, setPosts } = props;
+  const { classroomId, setPosts, login } = props;
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [priv, setPriv] = useState(false);
@@ -38,6 +38,7 @@ function AddPost(props) {
   };
 
   return (
+    (login && (
     <div>
       {' '}
       <form id="add" className="mx-auto" style={{ width: '800px' }}>
@@ -95,6 +96,7 @@ function AddPost(props) {
 
       </form>
     </div>
+    ))
   );
 }
 

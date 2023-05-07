@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
@@ -19,15 +20,16 @@ function ClassroomPreview(props) {
 function Classrooms(props) {
   // right after an user login in, app should direct user
   // to this page which has a list of classrooms that user is in
-  const { classrooms, setClassrooms, username } = props;
+  const {
+    classrooms, setClassrooms, username, login,
+  } = props;
   useEffect(() => {
     const getClassroomsWrapper = async () => {
       try {
         const response = await getAllClassrooms();
-        // const arr = [response];
         setClassrooms(response);
       } catch (err) {
-        console.error('error', err.message);
+        alert(`${err}`);
       }
     };
     getClassroomsWrapper();
@@ -52,7 +54,7 @@ function Classrooms(props) {
   return (
     <div>
       <Link to="/">Home</Link>
-      <AddClassroom setClassrooms={setClassrooms} username={username} />
+      <AddClassroom setClassrooms={setClassrooms} username={username} login={login} />
       <br />
       {displayedClassrooms}
     </div>

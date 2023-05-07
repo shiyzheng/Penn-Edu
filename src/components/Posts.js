@@ -1,8 +1,8 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { editPost } from '../api/posts';
+import { editPost, getAdmins } from '../api/posts';
+import { getCurrentUser } from '../api/users';
 
 function PostCard(props) {
   const { classroomId, posts, onEdit } = props;
@@ -24,31 +24,27 @@ function PostCard(props) {
   const [reply, setReply] = useState('');
   const [replies, setReplies] = useState(postReplies);
 
-  const [isAuthor, setIsAuthor] = useState(false);
+  // const [isAuthor, setIsAuthor] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [currUser, setCurrUser] = useState('');
 
-  // const userIsAuthor = async () => {
-  //   const currentUser = await getCurrentUser();
-  //   // console.log(currentUser);
-
-  //   return author === currentUser;
-  // };
-  const getCurrentUser = async () => {
-    try {
-      const response = await axios.get('/account/isLogged');
-      // console.log(response.data);
-      return response.data;
-    } catch (err) {
-      return err;
-    }
-  };
+  useEffect(() => {
+    const checkAdmins = async () => {
+      const admins = await getAdmins(classroomId);
+      const currentUser = await getCurrentUser();
+      setIsAdmin(admins.includes(currentUser));
+      // console.log(isAdmin);
+    };
+    checkAdmins();
+  }, [posts.length]);
 
   useEffect(() => {
     const checkAuthor = async () => {
       const currentUser = await getCurrentUser();
-      setIsAuthor(author === currentUser);
+      setCurrUser(currentUser);
     };
     checkAuthor();
-  }, posts);
+  }, []);
 
   const handleReplySubmit = () => {
     const replies1 = Array.isArray(replies) ? replies : [replies];
@@ -61,6 +57,7 @@ function PostCard(props) {
       anonymous,
       private: priv,
       replies: updatedReplies,
+      author,
     });
     setReply('');
     editPost(
@@ -71,6 +68,7 @@ function PostCard(props) {
       anonymous,
       priv,
       updatedReplies,
+      author,
     );
   };
 
@@ -112,6 +110,7 @@ function PostCard(props) {
       anonymous,
       priv,
       replies,
+      author,
     );
   };
 
@@ -165,7 +164,7 @@ function PostCard(props) {
       </div>
     );
   }
-  if (!anonymous || isAuthor) {
+  if (!priv || (currUser === author) || isAdmin) {
     return (
       <div className="row">
         <div className="col-md-3">
@@ -206,7 +205,7 @@ function PostCard(props) {
                   </p>
                 ))}
               </div>
-              {isAuthor ? (
+              {(currUser === author) ? (
                 <button className="btn btn-warning" data-testid="edit" id="edit" type="button" onClick={handleEdit}>Edit</button>
               ) : (
                 null
@@ -228,8 +227,6 @@ function Posts(props) {
     classroomId, posts, title, editPosts,
   } = props;
 
-  // console.log("asddddddddddddd");
-  // console.log(user);
   const handleEditPosts = (updatedPost) => {
     const displayedPosts = [];
     [...posts].forEach((element) => {
@@ -262,7 +259,6 @@ function Posts(props) {
       || element.body.toLowerCase().includes(String(title).toLowerCase())) {
         displayedPosts.push(
           <PostCard
-            // user={user}
             classroomId={classroomId}
             posts={element}
             onEdit={handleEditPosts}

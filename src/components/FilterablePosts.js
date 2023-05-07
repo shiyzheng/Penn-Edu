@@ -23,6 +23,7 @@ function FilterablePosts(props) {
 
   return (
     <div>
+      <Link to="/home">Classrooms</Link>
       <PostSearchBar setTitle={setTitle} />
       <Posts
         // user={user}

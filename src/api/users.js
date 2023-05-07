@@ -21,7 +21,7 @@ import axios from 'axios';
 //   }
 // };
 
-const createUser = async (userObject) => {
+export const createUser = async (userObject) => {
   // console.log('atapi');
   try {
     if (userObject.username === '' || userObject.password === '') {
@@ -31,12 +31,20 @@ const createUser = async (userObject) => {
       username: userObject.username,
       password: userObject.password,
     });
-    console.log(response);
     return response;
   } catch (err) {
-    console.error('error', err.message);
     return err;
   }
 };
 
-export default createUser;
+export const getCurrentUser = async () => {
+  try {
+    const response = await axios.get('/account/isLogged');
+    // console.log(response.data);
+    return response.data;
+  } catch (err) {
+    return err;
+  }
+};
+
+// export default createUser;

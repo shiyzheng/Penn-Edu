@@ -20,7 +20,6 @@ export const createNewClassroom = async (classroomObject) => {
       users,
       posts,
     });
-    console.log(response);
     return response;
   } catch (err) {
     return err;
@@ -31,6 +30,17 @@ export const getAllPostsInClassroomById = async (id) => {
   try {
     const response = await axios.get('/classroom/getId', {
       params: { id },
+    });
+    return response.data;
+  } catch (err) {
+    return err;
+  }
+};
+
+export const getAdmins = async (classroomId) => {
+  try {
+    const response = await axios.get('/classroom/getAdmins', {
+      params: { classroomId },
     });
     return response.data;
   } catch (err) {
@@ -73,6 +83,7 @@ export const editPost = async (
   postAnonymous,
   postPriv,
   postReplies,
+  author,
 ) => {
   try {
     const response = await axios.put('/classroom/editPost', {
@@ -83,6 +94,7 @@ export const editPost = async (
       postAnonymous,
       postPriv,
       postReplies,
+      author,
     });
     return response;
   } catch (err) {
