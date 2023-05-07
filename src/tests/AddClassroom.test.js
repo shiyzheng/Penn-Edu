@@ -7,15 +7,17 @@ import AddClassroom from '../components/AddClassroom';
 
 const setClassrooms = () => {};
 
+const alwaysTrue = true;
+
 test('renders addclassroom has button', () => {
-  render(<AddClassroom />);
+  render(<AddClassroom login={alwaysTrue} />);
   const linkElement = screen.getByTestId('button');
   expect(linkElement).toHaveClass('btn btn-primary');
   expect(linkElement).toBeInTheDocument();
 });
 
 test('renders addclassroom button click', async () => {
-  render(<AddClassroom setClassrooms={setClassrooms} />);
+  render(<AddClassroom setClassrooms={setClassrooms} login={alwaysTrue} />);
   const linkElement1 = screen.getByLabelText('Classroom Name');
   const linkElement2 = screen.getByTestId('button');
   await act(async () => {
