@@ -1,5 +1,5 @@
 describe('login', () => {
-  it('user should be able to log in', () => {
+  it('user should be able to signup', () => {
     cy.visit('http://localhost:3000/signup');
     cy.get('#Username').type('test@test.com');
     cy.get('#Password').type('test123');
