@@ -1,10 +1,10 @@
+/* eslint-disable no-alert */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import {
   Link, useNavigate,
 } from 'react-router-dom';
 import axios from 'axios';
-// import createUser from '../api/users';
 
 function Signup(props) {
   // signup page
@@ -19,31 +19,29 @@ function Signup(props) {
   }
 
   const createUser = async (userObject) => {
-    // console.log('atapi');
     try {
-      // if (userObject.username === '' || userObject.password === '') {
-      //   throw new Error('invalid username or password');
-      // }
       const response = await axios.post('/account/signup', {
         username: userObject.username,
         password: userObject.password,
       });
       // console.log(response);
-      if (response.data === 'user creation failed') {
-        throw new Error('user creation failed');
+      if (response.data === 'username taken' || response.data === 'error occured') {
+        alert(`${response.data}`);
+        setLogin(false);
+      } else {
+        setLogin(true);
+        navigate('/');
       }
-      navigate('/');
     } catch (err) {
-      console.error('error', err.message);
       alert('user signup failed');
     }
   };
 
   return (
     <div className="container">
-      <Link to="/home">Home</Link>
+      <Link to="/home">Classrooms</Link>
       <form id="add" className="mx-auto" style={{ width: '800px' }}>
-        <h2>Signup</h2>
+        <h2>Signup!</h2>
         <div className="form-group">
           <label htmlFor="Username">
             Username
@@ -63,7 +61,6 @@ function Signup(props) {
           data-testid="button"
           onClick={(e) => {
             e.preventDefault();
-            setLogin(true);
             createUser({ username, password });
             const form = document.getElementById('add');
             form.reset();
@@ -78,11 +75,6 @@ function Signup(props) {
           <Link to="/login">Log in here!</Link>
         </p>
       </form>
-      {login && (
-        <div>
-          You are now logged in. Head back to home to view the classrooms.
-        </div>
-      )}
     </div>
   );
 }

@@ -1,9 +1,10 @@
+/* eslint-disable no-alert */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { createNewClassroom } from '../api/posts';
 
 function AddClassroom(props) {
-  const { setClassrooms, username } = props;
+  const { setClassrooms, username, login } = props;
   const [classroomName, setClassroomName] = useState('');
   const handleClassroomNameChange = (e) => {
     setClassroomName(e.target.value);
@@ -22,10 +23,11 @@ function AddClassroom(props) {
       const form = document.getElementById('add');
       form.reset();
     } catch (err) {
-      console.error(err);
+      alert(`${err}`);
     }
   };
   return (
+    (login && (
     <div>
       {' '}
       <form id="add" className="mx-auto" style={{ width: '800px' }}>
@@ -49,6 +51,7 @@ function AddClassroom(props) {
 
       </form>
     </div>
+    ))
   );
 }
 

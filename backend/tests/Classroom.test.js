@@ -14,6 +14,7 @@ mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
 app.use(cookieSession({
   name: 'session',
   keys: ['pineapple'],
@@ -21,6 +22,7 @@ app.use(cookieSession({
   // Cookie Options
   maxAge: 24 * 60 * 60 * 1000, // 24 hours
 }));
+
 app.use('/classroom', ClassroomRouter);
 
 test('POST /create should create a new classroom', async () => {

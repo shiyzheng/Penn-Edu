@@ -27,7 +27,6 @@ router.post('/create', async (req, res) => {
       res.send('name taken');
     }
   } catch (e) {
-    console.log(e);
     res.send('error occured');
   }
 });
@@ -88,6 +87,7 @@ router.put('/editPost', async (req, res) => {
     postAnonymous,
     postPriv,
     postReplies,
+    author,
   } = req.body;
   try {
     const classroom = await Classroom.findOne({ _id: classroomId });
@@ -99,6 +99,7 @@ router.put('/editPost', async (req, res) => {
         post.private = postPriv;
         post.anonymous = postAnonymous;
         post.replies = postReplies;
+        post.author = author;
         await classroom.save();
         res.send('successful post update');
       } else {
@@ -109,6 +110,17 @@ router.put('/editPost', async (req, res) => {
     }
   } catch (e) {
     res.send('error occurred');
+  }
+});
+
+router.get('/getAdmins', async (req, res) => {
+  const { classroomId } = req.query;
+  // const { id } = body;
+  try {
+    const classroom = await Classroom.findOne({ _id: classroomId });
+    res.json(classroom.admins);
+  } catch (e) {
+    res.send('error');
   }
 });
 
