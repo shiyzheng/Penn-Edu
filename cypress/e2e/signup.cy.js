@@ -4,6 +4,6 @@ describe('login', () => {
     cy.get('#Username').type('test@test.com');
     cy.get('#Password').type('test123');
     cy.get('[data-testid="button"]').click();
-    cy.contains('You are now logged in.').should('be.visible');
+    cy.contains('Welcome test@test.com').should('be.visible');
   });
 });
