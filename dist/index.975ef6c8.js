@@ -37630,7 +37630,6 @@ var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactRouterDom = require("react-router-dom");
-var _reactRouterDomDefault = parcelHelpers.interopDefault(_reactRouterDom);
 var _posts = require("./Posts");
 var _postSearchBar = require("./PostSearchBar");
 var _postSearchBarDefault = parcelHelpers.interopDefault(_postSearchBar);
@@ -37641,7 +37640,7 @@ function FilterablePosts(props) {
     const { classroomId , posts , editPosts  } = props;
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDomDefault.default), {
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
                 to: "/home",
                 children: "Classrooms"
             }, void 0, false, {
