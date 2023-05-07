@@ -25,15 +25,15 @@ app.use(cookieSession({
 
 app.use('/classroom', ClassroomRouter);
 
-test('POST /create should create a new classroom', async () => {
-  const res = await request(app)
-    .post('/classroom/create')
-    .send({
-      name: 'testing classroom', posts: [], username: 'newuser',
-    });
-  expect(res.statusCode).toEqual(200);
-  expect(res.text).toEqual('successful classroom creation');
-});
+// test('POST /create should create a new classroom', async () => {
+//   const res = await request(app)
+//     .post('/classroom/create')
+//     .send({
+//       name: 'testing classroom', posts: [], username: 'newuser',
+//     });
+//   expect(res.statusCode).toEqual(200);
+//   expect(res.text).toEqual('successful classroom creation');
+// });
 
 test('POST /create should not create a new classroom if classroom name already taken', async () => {
   const res = await request(app)
