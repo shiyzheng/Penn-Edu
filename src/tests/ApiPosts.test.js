@@ -23,7 +23,7 @@ test('createNewClassroom create a new classroom', async () => {
 
   const result = await createNewClassroom(classroomObject);
 
-  expect(axios.post).toHaveBeenCalledWith('/api/classrooms', classroomObject);
+  expect(axios.post).toHaveBeenCalledWith('/classroom/create', classroomObject);
   expect(result).toEqual(newClassroom);
 });
 
@@ -39,6 +39,6 @@ test('createNewClassroom return an error if API call fails', async () => {
 
   const result = await createNewClassroom(classroomObject);
 
-  expect(axios.post).toHaveBeenCalledWith('/api/classrooms', classroomObject);
+  expect(axios.post).toHaveBeenCalledWith('/classroom/create', classroomObject);
   expect(result).toEqual(error);
 });

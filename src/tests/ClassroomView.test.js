@@ -7,9 +7,10 @@ import ClassroomView from '../components/ClassroomView';
 // const setClassrooms = () => {};
 
 test('renders classroomview', () => {
+  const asd = true;
   render(
     <MemoryRouter>
-      <ClassroomView />
+      <ClassroomView login={asd} />
     </MemoryRouter>,
   );
 });
